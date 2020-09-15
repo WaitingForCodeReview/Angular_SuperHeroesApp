@@ -1,0 +1,84 @@
+<div id="signUpForm">
+  <div class="form">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <h2>Create new user</h2>
+
+      <div class = "input-box">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <input type="text" placeholder="Username" formControlName="userName">
+        <div
+          *ngIf="form.get('userName').invalid && form.get('userName').touched"
+          class="validation"
+        >
+          <small
+            *ngIf="form.get('userName').errors.required"
+          >User name field can not be empty</small>
+          <small
+            *ngIf="form.get('userName').errors.minlength"
+          >User name minimal length is {{form.get('userName').errors.minlength.requiredLength}}. <br> Current length : {{form.get('userName').errors.minlength.actualLength}}<br></small>
+          <small
+            *ngIf="form.get('userName').errors.inValidFormat && !form.get('userName').errors.required"
+          >Wrong user name format</small>
+        </div>
+      </div>
+
+      <div class = "input-box">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <input type="text" placeholder="E-mail" formControlName="email">
+        <div
+          *ngIf="form.get('email').invalid && form.get('email').touched"
+          class="validation"
+        >
+          <small
+            *ngIf="form.get('email').errors.required"
+          >E-mail field can not be empty</small>
+          <small
+            *ngIf="form.get('email').errors.invalidDomain && !form.get('email').errors.required"
+          >Domain is invalid<br></small>
+          <small
+            *ngIf="form.get('email').errors.invalidAfterAt && !form.get('email').errors.required"
+          >Too much symbols after @<br></small>
+          <small
+            *ngIf="form.get('email').errors.tooManyDots && !form.get('email').errors.required"
+          >Too many dots before @<br></small>
+        </div>
+      </div>
+
+      <div class = "input-box">
+        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+        <input type="password" placeholder="Password" formControlName="password">
+        <div
+          *ngIf="form.get('password').invalid && form.get('password').touched"
+          class="validation"
+        >
+          <small
+            *ngIf="form.get('password').errors.required"
+          >Password field can not be empty</small>
+          <small
+            *ngIf="form.get('password').errors.minlength"
+          >Password minimal length is {{form.get('password').errors.minlength.requiredLength}}. <br> Current length : {{form.get('password').errors.minlength.actualLength}}<br></small>
+          <small
+            *ngIf="form.get('password').errors.noUpperLetter && !form.get('password').errors.required"
+          >Password should contain at least 1 upperCase letter<br></small>
+          <small
+            *ngIf="form.get('password').errors.noDigit && !form.get('password').errors.required"
+          >Password should contain at least 1 digit<br></small>
+          <small
+            *ngIf="form.get('password').errors.noSpecialSymbol && !form.get('password').errors.required"
+          >Password should contain at least 1 special symbol<br></small>
+          <small
+            *ngIf="form.get('password').errors.foundCoincidence && !form.get('password').errors.required"
+          >Password should not contain parts of user name or email</small>
+        </div>
+      </div>
+
+      <div class = "input-box">
+        <input type="submit"  [disabled]="form.invalid" value="Create new user">
+      </div>
+
+      <a routerLink="/sign-in">Sign in</a>
+
+    </form>
+  </div>
+</div>
