@@ -12,7 +12,7 @@ export class AuthService {
     localStorage.currentUser = JSON.stringify({
       "email" : formData.email,
       ...JSON.parse(localStorage[formData.email]),
-      "sessionExpTime" : Date.now() + 10000 ,
+      "sessionExpTime" : Date.now() + ONE_HOUR_MILLISECONDS ,
     })
   }
 
