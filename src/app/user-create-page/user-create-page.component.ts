@@ -18,10 +18,11 @@ export class UserCreatePageComponent implements OnInit {
 
   submit() {
     if(this.form.valid) {
-      console.log('Form ', this.form);
       const formData = {...this.form.value};
-
-      console.log('Data', formData);
+      localStorage.setItem(formData.email, JSON.stringify({
+        userName: formData.userName,
+        password: formData.password
+      }))
       this.form.reset();
     }
   }
@@ -36,6 +37,7 @@ export class UserCreatePageComponent implements OnInit {
       email: new FormControl('', [
         Validators.required,
         UserCreateValidators.validEmail,
+        UserCreateValidators.checkUniqueEmail,
       ]),
       password: new FormControl('', [
         Validators.required,
@@ -66,4 +68,7 @@ export class UserCreatePageComponent implements OnInit {
     return this.form.get(formControlName).errors.minlength;
   }
 
+  isNotUnique(formControlName: string) {
+    return this.form.get(formControlName).errors.notUnique;
+  }
 }

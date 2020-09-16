@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login-page',
@@ -8,8 +10,16 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class LoginPageComponent implements OnInit {
   form: FormGroup
+  isValidUserEntered: boolean
+  needToReLogin: boolean
 
-  constructor() { }
+  constructor(
+    private auth: AuthService,
+    private route: Router,
+  ) {
+    this.isValidUserEntered = true;
+    this.needToReLogin = this.auth.needToReLogin
+  }
 
   ngOnInit() {
     this.formInit();
@@ -17,10 +27,14 @@ export class LoginPageComponent implements OnInit {
 
   submit() {
     if(this.form.valid) {
-      console.log('Form ', this.form);
       const formData = {...this.form.value};
 
-      console.log('Data', formData);
+      if (this.userExists(formData.email, formData.password)) {
+        this.auth.login(formData);
+        this.route.navigate(['/main'])
+      } else {
+        this.isValidUserEntered = false;
+      }
     }
   }
 
@@ -43,4 +57,16 @@ export class LoginPageComponent implements OnInit {
     return this.form.get(formControlName).errors.required;
   }
 
+  userExists(email: string, password: string) {
+    for (let key in localStorage) {
+      if (LoginPageComponent.findUserCoincidence(key, email, password)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  static findUserCoincidence(key, email, password) {
+    return (localStorage.hasOwnProperty(key)) && (key === email) && (JSON.parse(localStorage[key]).password === password);
+  }
 }

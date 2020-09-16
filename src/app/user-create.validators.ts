@@ -1,5 +1,6 @@
 import {FormControl} from "@angular/forms";
 import {RegexpConfig} from "./user-create-page/regexp.config";
+import {hasOwnProperty} from "tslint/lib/utils";
 
 export class UserCreateValidators {
   static checkCoincidence(password: any): any {
@@ -36,6 +37,17 @@ export class UserCreateValidators {
         return null;
       }
       return {inValidFormat: true}
+    } catch (error) { }
+  }
+
+  static checkUniqueEmail({value}: FormControl) {
+    try {
+      for(let key in localStorage) {
+        if(localStorage.hasOwnProperty(key) && key === value){
+          return {notUnique: true}
+        }
+      }
+      return null
     } catch (error) { }
   }
 

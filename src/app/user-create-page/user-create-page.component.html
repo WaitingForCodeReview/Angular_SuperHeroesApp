@@ -36,6 +36,9 @@
           <small
             *ngIf="invalidFormat('email')"
           >Invalid e-mail format</small>
+          <small
+            *ngIf="isNotUnique('email')"
+          >User with such email already exists</small>
         </div>
       </div>
 
