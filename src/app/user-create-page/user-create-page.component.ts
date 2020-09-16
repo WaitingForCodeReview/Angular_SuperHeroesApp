@@ -13,27 +13,7 @@ export class UserCreatePageComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.form = new FormGroup({
-      userName: new FormControl('', [
-        Validators.required,
-        Validators.minLength(8),
-        UserCreateValidators.validUserName,
-        ]),
-      email: new FormControl('', [
-        Validators.required,
-        UserCreateValidators.checkDomain,
-        UserCreateValidators.checkAfterAt,
-        UserCreateValidators.checkDots,
-      ]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(5),
-        UserCreateValidators.oneUpperLetter,
-        UserCreateValidators.oneDigit,
-        UserCreateValidators.oneSpecialSymbol,
-        UserCreateValidators.checkCoincidence,
-      ])
-    });
+    this.formInit();
   }
 
   submit() {
@@ -44,6 +24,46 @@ export class UserCreatePageComponent implements OnInit {
       console.log('Data', formData);
       this.form.reset();
     }
+  }
+
+  formInit() {
+    this.form = new FormGroup({
+      userName: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+        UserCreateValidators.validUserName,
+      ]),
+      email: new FormControl('', [
+        Validators.required,
+        UserCreateValidators.validEmail,
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        UserCreateValidators.checkCoincidence,
+        UserCreateValidators.validPassword,
+      ])
+    });
+  }
+
+  invalidAndTouched(formControlName: string) {
+    return (this.form.get(formControlName).invalid) && (this.form.get(formControlName).touched);
+  }
+
+  isEmpty(formControlName: string) {
+    return this.form.get(formControlName).errors.required;
+  }
+
+  invalidFormat(formControlName: string) {
+    return (this.form.get(formControlName).errors.inValidFormat) && (!this.isEmpty(formControlName));
+  }
+
+  foundCoincidence(formControlName: string) {
+    return (this.form.get(formControlName).errors.foundCoincidence) && (!this.isEmpty(formControlName));
+  }
+
+  minLength(formControlName: string) {
+    return this.form.get(formControlName).errors.minlength;
   }
 
 }

@@ -8,18 +8,18 @@
         <i class="fa fa-user" aria-hidden="true"></i>
         <input type="text" placeholder="Username" formControlName="userName">
         <div
-          *ngIf="form.get('userName').invalid && form.get('userName').touched"
+          *ngIf="invalidAndTouched('userName')"
           class="validation"
         >
           <small
-            *ngIf="form.get('userName').errors.required"
+            *ngIf="isEmpty('userName')"
           >User name field can not be empty</small>
           <small
-            *ngIf="form.get('userName').errors.minlength"
-          >User name minimal length is {{form.get('userName').errors.minlength.requiredLength}}. <br> Current length : {{form.get('userName').errors.minlength.actualLength}}<br></small>
+            *ngIf="minLength('userName')"
+          >User name minimal length is {{minLength('userName').requiredLength}}. <br> Current length : {{minLength('userName').actualLength}}<br></small>
           <small
-            *ngIf="form.get('userName').errors.inValidFormat && !form.get('userName').errors.required"
-          >Wrong user name format</small>
+            *ngIf="invalidFormat('userName')"
+          >Invalid username format</small>
         </div>
       </div>
 
@@ -27,21 +27,15 @@
         <i class="fa fa-user" aria-hidden="true"></i>
         <input type="text" placeholder="E-mail" formControlName="email">
         <div
-          *ngIf="form.get('email').invalid && form.get('email').touched"
+          *ngIf="invalidAndTouched('email')"
           class="validation"
         >
           <small
-            *ngIf="form.get('email').errors.required"
+            *ngIf="isEmpty('email')"
           >E-mail field can not be empty</small>
           <small
-            *ngIf="form.get('email').errors.invalidDomain && !form.get('email').errors.required"
-          >Domain is invalid<br></small>
-          <small
-            *ngIf="form.get('email').errors.invalidAfterAt && !form.get('email').errors.required"
-          >Too much symbols after @<br></small>
-          <small
-            *ngIf="form.get('email').errors.tooManyDots && !form.get('email').errors.required"
-          >Too many dots before @<br></small>
+            *ngIf="invalidFormat('email')"
+          >Invalid e-mail format</small>
         </div>
       </div>
 
@@ -49,27 +43,21 @@
         <i class="fa fa-unlock-alt" aria-hidden="true"></i>
         <input type="password" placeholder="Password" formControlName="password">
         <div
-          *ngIf="form.get('password').invalid && form.get('password').touched"
+          *ngIf="invalidAndTouched('password')"
           class="validation"
         >
           <small
-            *ngIf="form.get('password').errors.required"
+            *ngIf="isEmpty('password')"
           >Password field can not be empty</small>
           <small
-            *ngIf="form.get('password').errors.minlength"
-          >Password minimal length is {{form.get('password').errors.minlength.requiredLength}}. <br> Current length : {{form.get('password').errors.minlength.actualLength}}<br></small>
+            *ngIf="minLength('password')"
+          >Password minimal length is {{minLength('password').requiredLength}}. <br> Current length : {{minLength('password').actualLength}}<br></small>
           <small
-            *ngIf="form.get('password').errors.noUpperLetter && !form.get('password').errors.required"
-          >Password should contain at least 1 upperCase letter<br></small>
+            *ngIf="foundCoincidence('password')"
+          >Password should not contain parts of user name or email<br></small>
           <small
-            *ngIf="form.get('password').errors.noDigit && !form.get('password').errors.required"
-          >Password should contain at least 1 digit<br></small>
-          <small
-            *ngIf="form.get('password').errors.noSpecialSymbol && !form.get('password').errors.required"
-          >Password should contain at least 1 special symbol<br></small>
-          <small
-            *ngIf="form.get('password').errors.foundCoincidence && !form.get('password').errors.required"
-          >Password should not contain parts of user name or email</small>
+            *ngIf="invalidFormat('password')"
+          >Invalid password format</small>
         </div>
       </div>
 

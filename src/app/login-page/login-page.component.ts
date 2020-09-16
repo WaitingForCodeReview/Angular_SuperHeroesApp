@@ -12,6 +12,19 @@ export class LoginPageComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.formInit();
+  }
+
+  submit() {
+    if(this.form.valid) {
+      console.log('Form ', this.form);
+      const formData = {...this.form.value};
+
+      console.log('Data', formData);
+    }
+  }
+
+   formInit() {
     this.form = new FormGroup({
       email: new FormControl('', [
         Validators.required,
@@ -22,13 +35,12 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
-  submit() {
-    if(this.form.valid) {
-      console.log('Form ', this.form);
-      const formData = {...this.form.value};
+  invalidAndTouched(formControlName: string) {
+    return (this.form.get(formControlName).invalid) && (this.form.get(formControlName).touched);
+  }
 
-      console.log('Data', formData);
-    }
+  isEmpty(formControlName: string) {
+    return this.form.get(formControlName).errors.required;
   }
 
 }

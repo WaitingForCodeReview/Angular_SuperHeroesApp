@@ -1,87 +1,51 @@
 import {FormControl} from "@angular/forms";
+import {RegexpConfig} from "./user-create-page/regexp.config";
 
 export class UserCreateValidators {
   static checkCoincidence(password: any): any {
-    const checked =
-      (password.value.indexOf(password.parent?.controls.userName.value) === -1) || (password.value.indexOf(password.parent?.controls.email.value) === -1);
-
-   if (checked) {
-     return null;
-   }
-   return {foundCoincidence: true};
-  }
-
-  static oneUpperLetter(password: FormControl) {
     try {
-      if (password.value.match(new RegExp('(.*[A-Z].*)'))) {
+      const parentObj = password.parent?.controls;
+      if (UserCreateValidators.findCoincidence(password, parentObj)) {
         return null;
       }
-      return {noUpperLetter: true};
+      return {foundCoincidence: true};
     } catch (error) { }
   }
 
-  static oneDigit(password: FormControl) {
+  static validPassword({value}: FormControl) {
     try {
-      if (password.value.match(new RegExp('(.*[0-9].*)'))) {
-        return null;
-      }
-      return {noDigit: true};
-    } catch (error) { }
-  }
-
-  static oneSpecialSymbol(password: FormControl) {
-    try {
-      if (password.value.match(new RegExp('(.*[$%.&!].*)'))) {
-        return null;
-      }
-      return {noSpecialSymbol: true};
-    } catch (error) { }
-  }
-
-  static validUserName(userName: FormControl) {
-    const kebabCase = new RegExp('^([a-z][a-z]*)(-[a-z]+)$');
-    const camelCase = new RegExp('^([a-z][a-z]*)([A-Z][a-z]*)$');
-    const spaceCase = new RegExp('^([A-Z][a-z]*) ([A-Z][a-z]*)$');
-
-    try {
-      const checked = (userName.value.match(kebabCase)) || (userName.value.match(camelCase)) || (userName.value.match(spaceCase));
-
-      if (checked) {
+      if (RegexpConfig.isValidPassword(value)) {
         return null;
       }
       return {inValidFormat: true}
     } catch (error) { }
   }
 
-  // (.com|.org|.net|.co|.us)$  : for allowed domains
-  static checkDomain(email: FormControl) {
-    const allowedDomains = new RegExp('(.com|.org|.net|.co|.us)$');
-
+  static validUserName({value}: FormControl) {
     try {
-      if(email.value.match(allowedDomains)) {
+      if (RegexpConfig.isValidUserName(value)) {
         return null;
       }
-      return {invalidDomain: true};
+      return {inValidFormat: true}
     } catch (error) { }
   }
 
-  static checkAfterAt(email: FormControl) {
-    const afterAt = new RegExp('@([a-zA-Z]{1,5})([.])([a-z]*)$');
-
+  static validEmail({value}: FormControl) {
     try {
-      if(email.value.match(afterAt)) {
+      if (RegexpConfig.isValidEmail(value)) {
         return null;
       }
-      return {invalidAfterAt: true};
+      return {inValidFormat: true}
     } catch (error) { }
   }
 
-  static checkDots(email: FormControl) {
-    try {
-      if(email.value.split('.').length < 6) {
-        return null;
-      }
-      return {tooManyDots: true};
-    } catch (error) { }
+  static findCoincidence(password: any, parentObj: any) {
+    return (password
+             .value
+             .indexOf(parentObj.userName.value) === -1) ||
+           (password
+             .value
+             .indexOf(parentObj.email.value) === -1);
   }
+
 }
