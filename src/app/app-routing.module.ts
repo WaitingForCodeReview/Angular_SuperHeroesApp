@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {LoginPageComponent} from "./login-page/login-page.component";
 import {UserCreatePageComponent} from "./user-create-page/user-create-page.component";
 import {MainLayoutComponent} from "./main-layout/main-layout.component";
+import {AuthGuard} from "./auth.guard";
 
 const routes: Routes = [
   //http://localhost::4200/ --> sign-in page
@@ -11,7 +12,7 @@ const routes: Routes = [
   {path: 'sign-in', component: LoginPageComponent},
   //http://localhost::4200/create-new-user  --> new user creation page
   {path: 'create-new-user', component: UserCreatePageComponent},
-  {path: 'main', component: MainLayoutComponent},
+  {path: 'main', component: MainLayoutComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
