@@ -1,6 +1,8 @@
 import {FormControl} from "@angular/forms";
 import {RegexpConfig} from "./user-create-page/regexp.config";
-import {hasOwnProperty} from "tslint/lib/utils";
+import {AppModule} from "./app.module";
+
+export interface ErrorObj { [key: string]: boolean }
 
 export class UserCreateValidators {
   static checkCoincidence(password: any): any {
@@ -13,16 +15,16 @@ export class UserCreateValidators {
     } catch (error) { }
   }
 
-  static validPassword({value}: FormControl) {
+  static validPassword({value}: FormControl): ErrorObj {
     try {
       if (RegexpConfig.isValidPassword(value)) {
         return null;
       }
-      return {inValidFormat: true}
+      return {inValidFormat: true};
     } catch (error) { }
   }
 
-  static validUserName({value}: FormControl) {
+  static validUserName({value}: FormControl): ErrorObj {
     try {
       if (RegexpConfig.isValidUserName(value)) {
         return null;
@@ -31,7 +33,7 @@ export class UserCreateValidators {
     } catch (error) { }
   }
 
-  static validEmail({value}: FormControl) {
+  static validEmail({value}: FormControl): ErrorObj {
     try {
       if (RegexpConfig.isValidEmail(value)) {
         return null;
@@ -40,18 +42,16 @@ export class UserCreateValidators {
     } catch (error) { }
   }
 
-  static checkUniqueEmail({value}: FormControl) {
+  static checkUniqueEmail({value}: FormControl): ErrorObj {
     try {
-      for(let key in localStorage) {
-        if(localStorage.hasOwnProperty(key) && key === value){
-          return {notUnique: true}
-        }
+      if(AppModule.users.some( item => item.email === value)) {
+        return {notUnique: true};
       }
       return null
     } catch (error) { }
   }
 
-  static findCoincidence(password: any, parentObj: any) {
+  static findCoincidence(password: any, parentObj: any): boolean {
     return (password
              .value
              .indexOf(parentObj.userName.value) === -1) ||

@@ -1,22 +1,22 @@
 import {Injectable} from "@angular/core";
 
+export interface FormData {
+  email: string,
+  userName: string,
+  password: string,
+}
+
 @Injectable({providedIn: 'root'})
 export class AuthService {
+  needToReLogin = false;
   private isAuth = false;
-  public needToReLogin = false;
 
-  login(formData) {
-    const ONE_HOUR_MILLISECONDS = 3600000;
-
+  login(formData: FormData): void {
     this.isAuth = true;
-    localStorage.currentUser = JSON.stringify({
-      "email" : formData.email,
-      ...JSON.parse(localStorage[formData.email]),
-      "sessionExpTime" : Date.now() + ONE_HOUR_MILLISECONDS ,
-    })
+    this.currentUserInit(formData);
   }
 
-  logout() {
+  logout(): void {
     this.isAuth = false;
     localStorage.removeItem("currentUser");
   }
@@ -34,8 +34,17 @@ export class AuthService {
     return this.isAuth;
   }
 
-  isExpiredSession() {
+  isExpiredSession(): boolean {
     return parseInt(JSON.parse(localStorage.getItem('currentUser')).sessionExpTime) < Date.now();
+  }
+
+  currentUserInit(formData: FormData): void {
+    const ONE_HOUR_MILLISECONDS = 3600000;
+
+    localStorage.currentUser = JSON.stringify({
+      ...formData,
+      "sessionExpTime" : Date.now() + ONE_HOUR_MILLISECONDS ,
+    });
   }
 
 }

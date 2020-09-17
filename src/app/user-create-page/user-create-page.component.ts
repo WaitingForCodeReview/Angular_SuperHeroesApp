@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserCreateValidators} from "../user-create.validators";
+import {FormData} from "../auth.service";
+import {AppModule} from "../app.module";
 
 @Component({
   selector: 'app-user-create-page',
@@ -12,22 +14,19 @@ export class UserCreatePageComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.formInit();
   }
 
-  submit() {
+  submit(): void {
     if(this.form.valid) {
-      const formData = {...this.form.value};
-      localStorage.setItem(formData.email, JSON.stringify({
-        userName: formData.userName,
-        password: formData.password
-      }))
+      const formData: FormData = {...this.form.value};
+      this.addUser(formData);
       this.form.reset();
     }
   }
 
-  formInit() {
+  formInit(): void {
     this.form = new FormGroup({
       userName: new FormControl('', [
         Validators.required,
@@ -48,27 +47,33 @@ export class UserCreatePageComponent implements OnInit {
     });
   }
 
-  invalidAndTouched(formControlName: string) {
+  invalidAndTouched(formControlName: string): boolean {
     return (this.form.get(formControlName).invalid) && (this.form.get(formControlName).touched);
   }
 
-  isEmpty(formControlName: string) {
+  isEmpty(formControlName: string): boolean {
     return this.form.get(formControlName).errors.required;
   }
 
-  invalidFormat(formControlName: string) {
+  invalidFormat(formControlName: string): boolean {
     return (this.form.get(formControlName).errors.inValidFormat) && (!this.isEmpty(formControlName));
   }
 
-  foundCoincidence(formControlName: string) {
+  foundCoincidence(formControlName: string): boolean {
     return (this.form.get(formControlName).errors.foundCoincidence) && (!this.isEmpty(formControlName));
   }
 
-  minLength(formControlName: string) {
+  minLength(formControlName: string): boolean {
     return this.form.get(formControlName).errors.minlength;
   }
 
-  isNotUnique(formControlName: string) {
+  isNotUnique(formControlName: string): boolean {
     return this.form.get(formControlName).errors.notUnique;
   }
+
+  addUser(formData: FormData): void {
+    AppModule.users.push(formData);
+    localStorage['users'] = JSON.stringify(AppModule.users);
+  }
+
 }

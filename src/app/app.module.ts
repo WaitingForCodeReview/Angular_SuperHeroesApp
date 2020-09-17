@@ -7,6 +7,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { UserCreatePageComponent } from './user-create-page/user-create-page.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormData} from "./auth.service";
 
 @NgModule({
   declarations: [
@@ -24,4 +25,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+   static users: Array<FormData> = localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users')) : [];
+}

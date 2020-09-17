@@ -31,7 +31,7 @@
       </div>
 
       <div class = "input-box">
-        <input type="submit" routerLink="/main" [disabled]="form.invalid" value="Sign in">
+        <input type="submit" [disabled]="form.invalid" value="Sign in">
         <div
           *ngIf="!isValidUserEntered"
           class="validation"
