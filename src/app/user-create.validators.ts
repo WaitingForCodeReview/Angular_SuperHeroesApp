@@ -29,7 +29,7 @@ export class UserCreateValidators {
       if (RegexpConfig.isValidUserName(value)) {
         return null;
       }
-      return {inValidFormat: true}
+      return {inValidFormat: true};
     } catch (error) { }
   }
 
@@ -38,7 +38,7 @@ export class UserCreateValidators {
       if (RegexpConfig.isValidEmail(value)) {
         return null;
       }
-      return {inValidFormat: true}
+      return {inValidFormat: true};
     } catch (error) { }
   }
 
@@ -47,7 +47,7 @@ export class UserCreateValidators {
       if(AppModule.users.some( item => item.email === value)) {
         return {notUnique: true};
       }
-      return null
+      return null;
     } catch (error) { }
   }
 
@@ -60,4 +60,12 @@ export class UserCreateValidators {
              .indexOf(parentObj.email.value) === -1);
   }
 
+  static heroSearchValidator({value}: FormControl): ErrorObj {
+    try {
+      if(RegexpConfig.isValidHeroSearch(value)) {
+        return null;
+      }
+      return {wrongSearch: true};
+    } catch (error) { }
+  }
 }

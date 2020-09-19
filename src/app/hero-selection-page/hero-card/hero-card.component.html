@@ -1,0 +1,21 @@
+<div class="heroCard">
+
+  <div class="imgDiv">
+    <img src="{{hero.imageUrl}}" alt="{{hero.name}}">
+  </div>
+
+  <div class="textDiv">
+    <h1>{{hero.name}}</h1>
+    <p>intelligence: {{hero.powerStats.intelligence}}</p>
+    <p>strength: {{hero.powerStats.strength}}</p>
+    <p>speed: {{hero.powerStats.speed}}</p>
+    <p>durability: {{hero.powerStats.durability}}</p>
+    <p>power: {{hero.powerStats.power}}</p>
+    <p>combat: {{hero.powerStats.combat}}</p>
+  </div>
+
+  <div class="buttonDiv">
+    <button [disabled]="isOwned" (click)="addHeroToOwned()"><a class="selectButton">{{isOwned ? 'SELECTED' : 'SELECT'}}</a></button>
+  </div>
+
+</div>

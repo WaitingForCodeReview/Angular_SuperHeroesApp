@@ -4,6 +4,7 @@ import {LoginPageComponent} from "./login-page/login-page.component";
 import {UserCreatePageComponent} from "./user-create-page/user-create-page.component";
 import {MainLayoutComponent} from "./main-layout/main-layout.component";
 import {AuthGuard} from "./auth.guard";
+import {HeroSelectionPageComponent} from "./hero-selection-page/hero-selection-page.component";
 
 const routes: Routes = [
   //http://localhost::4200/ --> sign-in page
@@ -12,7 +13,9 @@ const routes: Routes = [
   {path: 'sign-in', component: LoginPageComponent},
   //http://localhost::4200/create-new-user  --> new user creation page
   {path: 'create-new-user', component: UserCreatePageComponent},
-  {path: 'main', component: MainLayoutComponent, canActivate: [AuthGuard]},
+  {path: 'main', component: MainLayoutComponent, canActivate: [AuthGuard], children: [
+      {path: 'hero-selection', component: HeroSelectionPageComponent}
+    ]},
 ];
 
 @NgModule({

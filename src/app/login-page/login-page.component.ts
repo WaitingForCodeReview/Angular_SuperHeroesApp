@@ -30,7 +30,7 @@ export class LoginPageComponent implements OnInit {
       const formData: FormData = {...this.form.value};
       if (this.userExists(formData.email, formData.password)) {
         this.auth.login(formData);
-        this.route.navigate(['/main'])
+        this.route.navigate(['/main/hero-selection'])
       } else {
         this.isValidUserEntered = false;
       }
