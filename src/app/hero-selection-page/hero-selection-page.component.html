@@ -2,8 +2,17 @@
 
   <div class="input-div">
 
-    <div id="circleAlph">
-      <p>A</p>
+
+    <div class="circleAlph" (click)="showAlphabetical = !showAlphabetical">
+      <p>{{ circleLetter }}</p>
+    </div>
+
+    <div class="dropDownLetters" *ngIf="showAlphabetical">
+      <app-alphabetical-select
+        *ngFor="let letter of alphabet"
+        [letter]="letter"
+        (click)="letterClicked(letter)"
+      ></app-alphabetical-select>
     </div>
 
     <div>

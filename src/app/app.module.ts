@@ -11,6 +11,7 @@ import { HeroSelectionPageComponent } from './hero-selection-page/hero-selection
 import { RecentSearchComponent } from './hero-selection-page/recent-search/recent-search.component';
 import { HeroCardComponent } from './hero-selection-page/hero-card/hero-card.component';
 import {HttpClientModule} from "@angular/common/http";
+import { AlphabeticalSelectComponent } from './hero-selection-page/alphabetical-select/alphabetical-select.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {HttpClientModule} from "@angular/common/http";
     MainLayoutComponent,
     HeroSelectionPageComponent,
     RecentSearchComponent,
-    HeroCardComponent
+    HeroCardComponent,
+    AlphabeticalSelectComponent
   ],
   imports: [
     BrowserModule,

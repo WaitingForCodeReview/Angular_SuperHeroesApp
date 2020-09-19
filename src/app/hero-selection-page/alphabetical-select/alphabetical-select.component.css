@@ -1,0 +1,22 @@
+.circleAlphLetter {
+  text-align: center;
+  width: 100%;
+  border: 4px solid orange;
+  border-radius: 50%;
+  font-size: 30px;
+  cursor: pointer;
+  margin: 10%;
+  color: blue;
+  padding: 1%;
+  background: orange;
+}
+
+.circleAlphLetter:hover {
+  background-color: red;
+  transition: 0.3s;
+}
+
+.circleAlphLetter:not(:hover) {
+  background-color: orange;
+  transition: 0.3s;
+}
