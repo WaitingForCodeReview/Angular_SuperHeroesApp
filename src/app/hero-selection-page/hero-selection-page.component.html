@@ -1,0 +1,33 @@
+<div id="container">
+
+  <div class="input-div">
+
+    <div id="circleAlph">
+      <p>A</p>
+    </div>
+
+    <div>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <input type="text" placeholder="Enter search" formControlName="heroSearch">
+        <button type="submit" [disabled]="form.invalid"> <i class="fas fa-search"></i> </button>
+      </form>
+    </div>
+
+  </div>
+
+  <div id="recentSearches">
+    <app-recent-search
+    *ngFor="let search of recentSearches"
+    [search]="search"
+    (click)="searchByRecent($event)"
+    ></app-recent-search>
+  </div>
+
+  <div id="cardDiv">
+    <app-hero-card
+      *ngFor="let hero of heroesService.heroes"
+      [hero]="hero"
+    ></app-hero-card>
+  </div>
+
+</div>

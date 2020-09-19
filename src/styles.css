@@ -2,3 +2,8 @@
   margin: 0;
   padding: 0;
 }
+body {
+  background: url(./app/main-layout/images/back.jpg) fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

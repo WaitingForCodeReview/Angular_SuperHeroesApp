@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService, FormData} from "../auth.service";
+import {AuthService} from "../auth.service";
 import {Router} from "@angular/router";
-import {AppModule} from "../app.module";
+import {FormData} from "../interfaces.config";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-login-page',
@@ -30,7 +31,7 @@ export class LoginPageComponent implements OnInit {
       const formData: FormData = {...this.form.value};
       if (this.userExists(formData.email, formData.password)) {
         this.auth.login(formData);
-        this.route.navigate(['/main'])
+        this.route.navigate(['/main/hero-selection'])
       } else {
         this.isValidUserEntered = false;
       }
@@ -57,7 +58,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   userExists(email: string, password: string): boolean {
-    return AppModule.users.some( item => LoginPageComponent.findUserCoincidence(item, email, password));
+    return AppComponent.users.some( item => LoginPageComponent.findUserCoincidence(item, email, password));
   }
 
   static findUserCoincidence(item: FormData, email: string, password: string): boolean {

@@ -1,10 +1,5 @@
 import {Injectable} from "@angular/core";
-
-export interface FormData {
-  email: string,
-  userName: string,
-  password: string,
-}
+import {FormData} from "./interfaces.config";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -13,6 +8,7 @@ export class AuthService {
 
   login(formData: FormData): void {
     this.isAuth = true;
+    this.clearLastSessionRecentSearches();
     this.currentUserInit(formData);
   }
 
@@ -43,8 +39,16 @@ export class AuthService {
 
     localStorage.currentUser = JSON.stringify({
       ...formData,
-      "sessionExpTime" : Date.now() + ONE_HOUR_MILLISECONDS ,
+      "sessionExpTime" : Date.now() + ONE_HOUR_MILLISECONDS,
+      ownedHeroes: [],
+      lastSelectedHero: {},
     });
+  }
+
+  clearLastSessionRecentSearches() {
+    try {
+      localStorage["recentSearches"] = [];
+    } catch (error) { }
   }
 
 }

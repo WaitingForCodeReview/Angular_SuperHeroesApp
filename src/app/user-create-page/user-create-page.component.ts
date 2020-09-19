@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserCreateValidators} from "../user-create.validators";
-import {FormData} from "../auth.service";
-import {AppModule} from "../app.module";
+import {FormData} from "../interfaces.config";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-user-create-page',
@@ -72,8 +72,8 @@ export class UserCreatePageComponent implements OnInit {
   }
 
   addUser(formData: FormData): void {
-    AppModule.users.push(formData);
-    localStorage['users'] = JSON.stringify(AppModule.users);
+    AppComponent.users = [ ...AppComponent.users, formData ];
+    localStorage['users'] = JSON.stringify(AppComponent.users);
   }
 
 }
