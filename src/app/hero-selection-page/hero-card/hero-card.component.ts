@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {HeroInfoObj, HeroSelectionPageComponent} from "../hero-selection-page.component";
+import {HeroSelectionPageComponent} from "../hero-selection-page.component";
+import {HeroInfo} from "../../interfaces.config";
 
 @Component({
   selector: 'app-hero-card',
@@ -7,11 +8,9 @@ import {HeroInfoObj, HeroSelectionPageComponent} from "../hero-selection-page.co
   styleUrls: ['./hero-card.component.css']
 })
 export class HeroCardComponent implements OnInit {
-  @Input() hero: HeroInfoObj
+  @Input() hero: HeroInfo
 
   isOwned: boolean
-
-  constructor() { }
 
   ngOnInit(): void {
     this.checkOwned();
@@ -19,12 +18,12 @@ export class HeroCardComponent implements OnInit {
 
   addHeroToOwned(): void {
     this.isOwned = true;
-    HeroSelectionPageComponent.ownedHeroes.push(this.hero);
+    HeroSelectionPageComponent.ownedHeroes = [ ...HeroSelectionPageComponent.ownedHeroes, this.hero ];
     HeroSelectionPageComponent.lastSelectedHero = this.hero;
     this.initOwnedHeroLocalSt();
   }
 
-  initOwnedHeroLocalSt() {
+  initOwnedHeroLocalSt(): void {
     localStorage["currentUser"] = JSON.stringify({
       ...JSON.parse(localStorage["currentUser"]),
       ownedHeroes: HeroSelectionPageComponent.ownedHeroes,

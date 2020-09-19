@@ -17,16 +17,16 @@
 
   <div id="recentSearches">
     <app-recent-search
-    *ngFor="let s of recentSearches"
-    [search]="s"
+    *ngFor="let search of recentSearches"
+    [search]="search"
     (click)="searchByRecent($event)"
     ></app-recent-search>
   </div>
 
   <div id="cardDiv">
     <app-hero-card
-      *ngFor="let h of heroes"
-      [hero]="h"
+      *ngFor="let hero of heroes"
+      [hero]="hero"
     ></app-hero-card>
   </div>
 

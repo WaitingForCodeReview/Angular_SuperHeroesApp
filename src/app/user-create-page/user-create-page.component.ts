@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserCreateValidators} from "../user-create.validators";
-import {FormData} from "../auth.service";
+import {FormData} from "../interfaces.config";
 import {AppModule} from "../app.module";
 
 @Component({

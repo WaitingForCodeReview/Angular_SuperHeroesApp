@@ -1,19 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserCreateValidators} from "../user-create.validators";
+import {HeroInfo} from "../interfaces.config";
 
-export interface HeroInfoObj {
-  name: string,
-  imageUrl: string,
-  powerStats: {
-    intelligence: string,
-    strength: string,
-    speed: string,
-    durability: string,
-    power: string,
-    combat: string,
-  }
-}
 
 @Component({
   selector: 'app-hero-selection-page',
@@ -24,18 +13,15 @@ export class HeroSelectionPageComponent implements OnInit {
 
   form: FormGroup
   accessToken: string = '2838684283046319'
-  heroes: Array<HeroInfoObj> = new Array<HeroInfoObj>()
+  heroes: Array<HeroInfo> = new Array<HeroInfo>()
   recentSearches: Set<string> = new Set()
 
-  static ownedHeroes: Array<HeroInfoObj> = new Array<HeroInfoObj>()
-  static lastSelectedHero: HeroInfoObj
-
-  constructor() {
-    this.initRecentSearches();
-    this.initOwnedHeroes();
-  }
+  static ownedHeroes: Array<HeroInfo> = new Array<HeroInfo>()
+  static lastSelectedHero: HeroInfo
 
   ngOnInit(): void {
+    this.initRecentSearches();
+    this.initOwnedHeroes();
     this.formInit();
   }
 
@@ -89,28 +75,23 @@ export class HeroSelectionPageComponent implements OnInit {
   // initializes heroesArray with got json-heroes-data from api
   initHeroes(gotApiHeroesObj: any): void {
     gotApiHeroesObj.results.forEach( hero => {
-      const tempHero: HeroInfoObj = {
+      const tempHero: HeroInfo = {
         name: hero.name,
         imageUrl: hero.image.url,
         powerStats: {
-          intelligence: hero.powerstats.intelligence,
-          strength: hero.powerstats.strength,
-          speed: hero.powerstats.speed,
-          durability: hero.powerstats.durability,
-          power: hero.powerstats.power,
-          combat: hero.powerstats.combat,
+          ...Object.assign({},hero.powerstats)
         }
       }
       if(tempHero.powerStats.intelligence !== 'null') {
-        this.heroes.push(tempHero);
+        this.heroes = [ ...this.heroes, tempHero ]
       }
     })
   }
 
   // updates recentSearchesArray by adding new search
   updateRecentSearches(heroSearchValue: string): void {
-    this.recentSearches.add(heroSearchValue);
-    localStorage.setItem("recentSearches", JSON.stringify(Array.from(this.recentSearches.values())));
+    this.recentSearches = new Set([ ...this.recentSearches, heroSearchValue]);
+    localStorage.setItem("recentSearches", JSON.stringify([ ...this.recentSearches.values() ]));
   }
 
   searchByRecent(event): void {

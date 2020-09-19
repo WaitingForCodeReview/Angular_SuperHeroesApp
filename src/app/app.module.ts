@@ -7,10 +7,10 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { UserCreatePageComponent } from './user-create-page/user-create-page.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {FormData} from "./auth.service";
-import {HeroInfoObj, HeroSelectionPageComponent} from './hero-selection-page/hero-selection-page.component';
+import { HeroSelectionPageComponent } from './hero-selection-page/hero-selection-page.component';
 import { RecentSearchComponent } from './hero-selection-page/recent-search/recent-search.component';
 import { HeroCardComponent } from './hero-selection-page/hero-card/hero-card.component';
+import {FormData} from "./interfaces.config";
 
 @NgModule({
   declarations: [

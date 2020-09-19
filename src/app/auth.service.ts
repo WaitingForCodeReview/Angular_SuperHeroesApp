@@ -1,13 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HeroInfoObj} from "./hero-selection-page/hero-selection-page.component";
-
-export interface FormData {
-  email: string,
-  userName: string,
-  password: string,
-  ownedHeroes: Array<HeroInfoObj>,
-  lastSelectedHero: HeroInfoObj,
-}
+import {FormData} from "./interfaces.config";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {

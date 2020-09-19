@@ -8,46 +8,32 @@ export class UserCreateValidators {
   static checkCoincidence(password: any): any {
     try {
       const parentObj = password.parent?.controls;
-      if (UserCreateValidators.findCoincidence(password, parentObj)) {
-        return null;
-      }
-      return {foundCoincidence: true};
+
+      return UserCreateValidators.findCoincidence(password, parentObj) ? null : {foundCoincidence: true};
     } catch (error) { }
   }
 
   static validPassword({value}: FormControl): ErrorObj {
     try {
-      if (RegexpConfig.isValidPassword(value)) {
-        return null;
-      }
-      return {inValidFormat: true};
+      return RegexpConfig.isValidPassword(value) ? null : {inValidFormat: true};
     } catch (error) { }
   }
 
   static validUserName({value}: FormControl): ErrorObj {
     try {
-      if (RegexpConfig.isValidUserName(value)) {
-        return null;
-      }
-      return {inValidFormat: true};
+      return RegexpConfig.isValidUserName(value) ? null : {inValidFormat: true};
     } catch (error) { }
   }
 
   static validEmail({value}: FormControl): ErrorObj {
     try {
-      if (RegexpConfig.isValidEmail(value)) {
-        return null;
-      }
-      return {inValidFormat: true};
+      return RegexpConfig.isValidEmail(value) ? null : {inValidFormat: true};
     } catch (error) { }
   }
 
   static checkUniqueEmail({value}: FormControl): ErrorObj {
     try {
-      if(AppModule.users.some( item => item.email === value)) {
-        return {notUnique: true};
-      }
-      return null;
+      return AppModule.users.some( item => item.email === value) ? {notUnique: true} : null;
     } catch (error) { }
   }
 
@@ -62,10 +48,7 @@ export class UserCreateValidators {
 
   static heroSearchValidator({value}: FormControl): ErrorObj {
     try {
-      if(RegexpConfig.isValidHeroSearch(value)) {
-        return null;
-      }
-      return {wrongSearch: true};
+      return RegexpConfig.isValidHeroSearch(value) ? null : {wrongSearch: true};
     } catch (error) { }
   }
 }
