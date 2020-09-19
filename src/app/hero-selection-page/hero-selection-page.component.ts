@@ -3,6 +3,15 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserCreateValidators} from "../user-create.validators";
 import {HeroInfo} from "../interfaces.config";
 
+function Hero(apiObj) {
+  Object.assign(this, {
+    name: apiObj.name,
+    imageUrl: apiObj.image.url,
+    powerStats: {
+      ...Object.assign({}, apiObj.powerstats)
+    }
+  })
+}
 
 @Component({
   selector: 'app-hero-selection-page',
@@ -75,13 +84,8 @@ export class HeroSelectionPageComponent implements OnInit {
   // initializes heroesArray with got json-heroes-data from api
   initHeroes(gotApiHeroesObj: any): void {
     gotApiHeroesObj.results.forEach( hero => {
-      const tempHero: HeroInfo = {
-        name: hero.name,
-        imageUrl: hero.image.url,
-        powerStats: {
-          ...Object.assign({},hero.powerstats)
-        }
-      }
+      const tempHero: HeroInfo = new Hero(hero);
+
       if(tempHero.powerStats.intelligence !== 'null') {
         this.heroes = [ ...this.heroes, tempHero ]
       }
