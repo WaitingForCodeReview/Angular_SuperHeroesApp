@@ -20,3 +20,10 @@ export interface FormData {
   ownedHeroes: Array<HeroInfo>,
   lastSelectedHero: HeroInfo,
 }
+
+export interface ApiResponse {
+  response: string,
+  error?: string
+  'results-for'?: string,
+  results?: Array<Object>
+}

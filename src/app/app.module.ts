@@ -10,7 +10,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HeroSelectionPageComponent } from './hero-selection-page/hero-selection-page.component';
 import { RecentSearchComponent } from './hero-selection-page/recent-search/recent-search.component';
 import { HeroCardComponent } from './hero-selection-page/hero-card/hero-card.component';
-import {FormData} from "./interfaces.config";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -26,17 +26,10 @@ import {FormData} from "./interfaces.config";
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-
-   static users: Array<FormData> = localStorage.getItem('users')
-     ? JSON.parse(localStorage.getItem('users'))
-     : [];
-
-   constructor() { }
-
-}
+export class AppModule { }

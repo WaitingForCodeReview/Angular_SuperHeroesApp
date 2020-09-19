@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {HeroSelectionPageComponent} from "../hero-selection-page.component";
 import {HeroInfo} from "../../interfaces.config";
+import {HeroesService} from "../../heroes.service";
 
 @Component({
   selector: 'app-hero-card',
@@ -12,28 +12,30 @@ export class HeroCardComponent implements OnInit {
 
   isOwned: boolean
 
+  constructor(public heroesService: HeroesService) {}
+
   ngOnInit(): void {
     this.checkOwned();
   }
 
   addHeroToOwned(): void {
     this.isOwned = true;
-    HeroSelectionPageComponent.ownedHeroes = [ ...HeroSelectionPageComponent.ownedHeroes, this.hero ];
-    HeroSelectionPageComponent.lastSelectedHero = this.hero;
+    this.heroesService.ownedHeroes = [ ...this.heroesService.ownedHeroes, this.hero ];
+    this.heroesService.lastSelectedHero = this.hero;
     this.initOwnedHeroLocalSt();
   }
 
   initOwnedHeroLocalSt(): void {
     localStorage["currentUser"] = JSON.stringify({
       ...JSON.parse(localStorage["currentUser"]),
-      ownedHeroes: HeroSelectionPageComponent.ownedHeroes,
-      lastSelectedHero: HeroSelectionPageComponent.lastSelectedHero,
+      ownedHeroes: this.heroesService.ownedHeroes,
+      lastSelectedHero: this.heroesService.lastSelectedHero,
     })
   }
 
   checkOwned(): void {
     try {
-      this.isOwned = HeroSelectionPageComponent.ownedHeroes.some(item => item.name === this.hero.name);
+      this.isOwned = this.heroesService.ownedHeroes.some(item => item.name === this.hero.name);
     } catch (error) { }
   }
 

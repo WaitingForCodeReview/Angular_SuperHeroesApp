@@ -1,6 +1,6 @@
 import {FormControl} from "@angular/forms";
 import {RegexpConfig} from "./user-create-page/regexp.config";
-import {AppModule} from "./app.module";
+import {AppComponent} from "./app.component";
 
 export interface ErrorObj { [key: string]: boolean }
 
@@ -33,7 +33,7 @@ export class UserCreateValidators {
 
   static checkUniqueEmail({value}: FormControl): ErrorObj {
     try {
-      return AppModule.users.some( item => item.email === value) ? {notUnique: true} : null;
+      return AppComponent.users.some( item => item.email === value) ? {notUnique: true} : null;
     } catch (error) { }
   }
 

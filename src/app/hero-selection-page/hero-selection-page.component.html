@@ -25,7 +25,7 @@
 
   <div id="cardDiv">
     <app-hero-card
-      *ngFor="let hero of heroes"
+      *ngFor="let hero of heroesService.heroes"
       [hero]="hero"
     ></app-hero-card>
   </div>
