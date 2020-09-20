@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserCreateValidators} from "../user-create.validators";
 import {HeroesService} from "../heroes.service";
@@ -13,6 +13,9 @@ export class HeroSelectionPageComponent implements OnInit {
 
   form: FormGroup
   recentSearches: Set<string> = new Set()
+  showAlphabetical: boolean = false
+  alphabet: string[] = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+  circleLetter: string = 'a';
 
   constructor(public heroesService: HeroesService) {}
 
@@ -52,6 +55,7 @@ export class HeroSelectionPageComponent implements OnInit {
           this.updateRecentSearches(heroSearchValue);
         }
       });
+      this.showAlphabetical = false;
     }
   }
 
@@ -65,6 +69,16 @@ export class HeroSelectionPageComponent implements OnInit {
 
     this.form.controls.heroSearch.setValue(target.innerText);
     this.submit();
+  }
+
+  letterClicked(letter: string): void {
+    this.circleLetter = letter;
+    this.showAlphabetical = false;
+    this.form.controls.heroSearch.setValue(letter);
+  }
+
+  hideUnhideAlphabetical() {
+    this.showAlphabetical = !this.showAlphabetical
   }
 
 }

@@ -32,7 +32,16 @@
   cursor: pointer;
   margin-left: 8%;
 }
-#circleAlph {
+
+form button {
+  width: 15%;
+  height: 20%;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+.circleAlph {
   text-align: center;
   width: 21%;
   border: 4px solid orange;
@@ -42,11 +51,20 @@
   margin-right: 3%;
   cursor: pointer;
 }
-form button {
-  width: 15%;
-  height: 20%;
-  border: none;
-  background: none;
-  outline: none;
+
+.dropDownLetters {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 2.5%;
+  top: 20%
 }
 
+.circleAlph:hover {
+  border-color: red;
+  transition: 0.3s;
+}
+
+.circleAlph:not(:hover) {
+  transition: 0.3s;
+}
