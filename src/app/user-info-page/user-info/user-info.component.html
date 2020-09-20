@@ -1,0 +1,12 @@
+<div id="container">
+
+  <a class="tab" (click)="showHeroesListTab()">Heroes List</a>
+  <a class="tab" (click)="showHistoryTab() ">History</a>
+  <a class="tab" (click)="showPowerUpsTab()">Power Ups</a>
+
+</div>
+
+<app-heroes-list-tab *ngIf="isHeroesTabToShow()"></app-heroes-list-tab>
+<app-history-tab *ngIf="isHistoryTabToShow()"></app-history-tab>
+<app-power-ups-tab *ngIf="isPowerUpsToShow()"></app-power-ups-tab>
+

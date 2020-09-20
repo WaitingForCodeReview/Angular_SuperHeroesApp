@@ -10,7 +10,7 @@
 header {
   display: flex;
   width: 100%;
-  height: 7.5vh;
+  height: 8vh;
   color: white;
   background-color: black;
   font-weight: bold;
@@ -37,5 +37,13 @@ header {
 
 .glow {
   text-shadow: #EEEE00 0 0 10px, #FF0000 5px 5px 5px;
+}
+
+a {
+  outline: none;
+  border: none;
+  background: none;
+  text-decoration: none;
+  color: white;
 }
 

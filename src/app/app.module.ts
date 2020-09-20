@@ -12,18 +12,27 @@ import { RecentSearchComponent } from './hero-selection-page/recent-search/recen
 import { HeroCardComponent } from './hero-selection-page/hero-card/hero-card.component';
 import {HttpClientModule} from "@angular/common/http";
 import { AlphabeticalSelectComponent } from './hero-selection-page/alphabetical-select/alphabetical-select.component';
+import { UserInfoComponent } from './user-info-page/user-info/user-info.component';
+import { HeroesListTabComponent } from './user-info-page/heroes-list-tab/heroes-list-tab.component';
+import { HistoryTabComponent } from './user-info-page/history-tab/history-tab.component';
+import {PowerUpsTabComponent} from "./user-info-page/power-ups-tab/power-ups-tab.component";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginPageComponent,
-    UserCreatePageComponent,
-    MainLayoutComponent,
-    HeroSelectionPageComponent,
-    RecentSearchComponent,
-    HeroCardComponent,
-    AlphabeticalSelectComponent
-  ],
+    declarations: [
+        AppComponent,
+        LoginPageComponent,
+        UserCreatePageComponent,
+        MainLayoutComponent,
+        HeroSelectionPageComponent,
+        RecentSearchComponent,
+        HeroCardComponent,
+        AlphabeticalSelectComponent,
+        UserInfoComponent,
+        HeroesListTabComponent,
+        HistoryTabComponent,
+        PowerUpsTabComponent,
+        PowerUpsTabComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
