@@ -14,7 +14,7 @@ export class HeroSelectionPageComponent implements OnInit {
   form: FormGroup
   recentSearches: Set<string> = new Set()
   showAlphabetical: boolean = false
-  alphabet: Array<string> = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+  alphabet: string[] = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
   circleLetter: string = 'a';
 
   constructor(public heroesService: HeroesService) {}
@@ -75,6 +75,10 @@ export class HeroSelectionPageComponent implements OnInit {
     this.circleLetter = letter;
     this.showAlphabetical = false;
     this.form.controls.heroSearch.setValue(letter);
+  }
+
+  hideUnhideAlphabetical() {
+    this.showAlphabetical = !this.showAlphabetical
   }
 
 }

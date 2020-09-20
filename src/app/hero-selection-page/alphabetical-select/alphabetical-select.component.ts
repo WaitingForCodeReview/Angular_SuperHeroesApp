@@ -15,7 +15,7 @@ export class AlphabeticalSelectComponent implements OnInit {
   ngOnInit(): void { }
 
   searchByClickedLetter(letterClicked: string): void {
-    const url = this.heroesService.getUrl(letterClicked);
+    const url: string = this.heroesService.getUrl(letterClicked);
 
     this.heroesService.getHeroes(url);
   }
