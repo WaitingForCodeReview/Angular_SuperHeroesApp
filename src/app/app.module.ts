@@ -16,6 +16,7 @@ import { UserInfoComponent } from './user-info-page/user-info/user-info.componen
 import { HeroesListTabComponent } from './user-info-page/heroes-list-tab/heroes-list-tab.component';
 import {PowerUpsTabComponent} from "./user-info-page/power-ups-tab/power-ups-tab.component";
 import {HistoryTabComponent} from "./user-info-page/history-tab/history-tab.component";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
     declarations: [
@@ -31,14 +32,14 @@ import {HistoryTabComponent} from "./user-info-page/history-tab/history-tab.comp
         HeroesListTabComponent,
         HistoryTabComponent,
         PowerUpsTabComponent,
-        PowerUpsTabComponent
     ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

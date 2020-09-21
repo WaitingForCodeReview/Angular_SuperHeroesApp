@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {PowerUpsService} from "../../power-ups.service";
 
 @Component({
   selector: 'app-power-ups-tab',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PowerUpsTabComponent implements OnInit {
 
-  constructor() { }
+  constructor(public powerUpsService: PowerUpsService) { }
 
   ngOnInit(): void {
+    this.powerUpsService.powerUps.sort( (a,b) => ~(parseInt(a.usesLeft) - parseInt(b.usesLeft)))
   }
 
 }

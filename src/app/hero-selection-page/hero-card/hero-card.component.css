@@ -11,9 +11,10 @@
   color: orange;
 }
 .heroCard .imgDiv {
-  width: 25%;
+  width: 40%;
 }
 .heroCard .imgDiv img{
+  width: 100%;
   height: 100%;
   border-radius: 7px;
 }

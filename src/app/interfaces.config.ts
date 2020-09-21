@@ -34,3 +34,11 @@ export interface BattleInfo {
   enemyName: string,
   battleResult: string,
 }
+
+export interface PowerUp {
+  title: string,
+  powerStatName: string,
+  powerStatUpgradeValue: string,
+  usesLeft: string,
+  imgUrl: string,
+}
