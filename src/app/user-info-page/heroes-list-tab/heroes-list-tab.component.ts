@@ -14,7 +14,7 @@ export class HeroesListTabComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  redirectToHeroSelect() {
+  redirectToHeroSelect(): void {
     this.router.navigate(['main/hero-selection']);
   }
 

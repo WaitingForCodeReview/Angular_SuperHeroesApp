@@ -59,7 +59,7 @@ export class HeroesService {
     })
   }
 
-  initOwnedHeroesLocalStorage() {
+  initOwnedHeroesLocalStorage(): void {
     try {
       this.ownedHeroes = JSON.parse(localStorage["currentUser"]).ownedHeroes;
     } catch (error) {}
