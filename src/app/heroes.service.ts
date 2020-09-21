@@ -23,8 +23,11 @@ export class HeroesService {
   heroes: Array<HeroInfo> = new Array<HeroInfo>()
   ownedHeroes: Array<HeroInfo> = new Array<HeroInfo>()
   lastSelectedHero: HeroInfo
+  lastSearch: string = ''
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.initOwnedHeroesLocalStorage();
+  }
 
   // creates the url using api token and searchValue
   getUrl(searchValue: string): string {
@@ -54,5 +57,11 @@ export class HeroesService {
         this.heroes = [ ...this.heroes, tempHero ]
       }
     })
+  }
+
+  initOwnedHeroesLocalStorage() {
+    try {
+      this.ownedHeroes = JSON.parse(localStorage["currentUser"]).ownedHeroes;
+    } catch (error) {}
   }
 }

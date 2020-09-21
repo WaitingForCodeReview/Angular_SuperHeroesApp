@@ -38,7 +38,7 @@ export class HeroSelectionPageComponent implements OnInit {
 
   formInit(): void {
     this.form = new FormGroup({
-      heroSearch: new FormControl('', [
+      heroSearch: new FormControl(this.heroesService.lastSearch, [
         Validators.required,
         UserCreateValidators.heroSearchValidator,
       ]),
@@ -50,6 +50,7 @@ export class HeroSelectionPageComponent implements OnInit {
       const heroSearchValue = this.form.value.heroSearch;
       const url = this.heroesService.getUrl(heroSearchValue);
 
+      this.heroesService.lastSearch = heroSearchValue;
       this.heroesService.getHeroes(url).add( () => {
         if (this.heroesService.searchSucceed) {
           this.updateRecentSearches(heroSearchValue);
@@ -75,6 +76,7 @@ export class HeroSelectionPageComponent implements OnInit {
     this.circleLetter = letter;
     this.showAlphabetical = false;
     this.form.controls.heroSearch.setValue(letter);
+    this.heroesService.lastSearch = letter;
   }
 
   hideUnhideAlphabetical() {

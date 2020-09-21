@@ -15,7 +15,18 @@
   </div>
 
   <div class="buttonDiv">
-    <button [disabled]="isOwned" (click)="addHeroToOwned()"><a class="selectButton">{{ isOwned ? 'OWNED' : 'SELECT' }}</a></button>
+
+    <div class="flex">
+      <button [disabled]="isOwned" (click)="addHeroToOwned()"><a class="selectButton">{{ isOwned ? 'OWNED' : 'SELECT' }}</a></button>
+      <button *ngIf="isOwned" (click)="removeHeroFromOwned()"><a class="selectButton">REMOVE</a></button>
+    </div>
+
+    <div>
+      <button><a class="selectButton">View Hero</a></button>
+    </div>
+
   </div>
+
+
 
 </div>

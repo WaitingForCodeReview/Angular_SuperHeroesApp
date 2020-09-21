@@ -25,6 +25,15 @@ export class HeroCardComponent implements OnInit {
     this.initOwnedHeroLocalSt();
   }
 
+  removeHeroFromOwned(): void {
+    this.isOwned = false;
+    this.heroesService.ownedHeroes = this.heroesService.ownedHeroes.filter( (item) => {
+      return item.name !== this.hero.name;
+    });
+    this.heroesService.lastSelectedHero = null;
+    this.initOwnedHeroLocalSt();
+  }
+
   initOwnedHeroLocalSt(): void {
     localStorage["currentUser"] = JSON.stringify({
       ...JSON.parse(localStorage["currentUser"]),

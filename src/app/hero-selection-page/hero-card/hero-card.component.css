@@ -48,3 +48,19 @@ a.selectButton {
   transition: .2s ease-in-out;
 }
 
+.buttonDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+  margin-bottom: 6%;
+}
+.flex {
+  display: flex;
+  flex-direction: column;
+}
