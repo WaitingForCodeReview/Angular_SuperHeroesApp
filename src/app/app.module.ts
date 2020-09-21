@@ -14,8 +14,8 @@ import {HttpClientModule} from "@angular/common/http";
 import { AlphabeticalSelectComponent } from './hero-selection-page/alphabetical-select/alphabetical-select.component';
 import { UserInfoComponent } from './user-info-page/user-info/user-info.component';
 import { HeroesListTabComponent } from './user-info-page/heroes-list-tab/heroes-list-tab.component';
-import { HistoryTabComponent } from './user-info-page/history-tab/history-tab.component';
 import {PowerUpsTabComponent} from "./user-info-page/power-ups-tab/power-ups-tab.component";
+import {HistoryTabComponent} from "./user-info-page/history-tab/history-tab.component";
 
 @NgModule({
     declarations: [

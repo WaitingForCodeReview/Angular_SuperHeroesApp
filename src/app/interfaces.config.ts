@@ -27,3 +27,10 @@ export interface ApiResponse {
   'results-for'?: string,
   results?: Array<Object>
 }
+
+export interface BattleInfo {
+  battleDateTime: any,
+  heroName: string,
+  enemyName: string,
+  battleResult: string,
+}
