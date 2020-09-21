@@ -27,16 +27,4 @@ export class UserInfoComponent implements OnInit {
     this.tabToShow = this.powerUpsTab;
   }
 
-  isHeroesTabToShow() {
-    return this.tabToShow === this.heroesListTab;
-  }
-
-  isHistoryTabToShow() {
-    return this.tabToShow === this.historyTab;
-  }
-
-  isPowerUpsToShow() {
-    return this.tabToShow === this.powerUpsTab;
-  }
-
 }
