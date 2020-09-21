@@ -6,7 +6,8 @@
 
 </div>
 
-<app-heroes-list-tab *ngIf="isHeroesTabToShow()"></app-heroes-list-tab>
-<app-history-tab *ngIf="isHistoryTabToShow()"></app-history-tab>
-<app-power-ups-tab *ngIf="isPowerUpsToShow()"></app-power-ups-tab>
-
+<div [ngSwitch]="tabToShow">
+  <app-heroes-list-tab *ngSwitchCase="heroesListTab"></app-heroes-list-tab>
+  <app-history-tab *ngSwitchCase="historyTab"></app-history-tab>
+  <app-power-ups-tab *ngSwitchCase="powerUpsTab"></app-power-ups-tab>
+</div>
