@@ -11,7 +11,11 @@ export class PowerUpsTabComponent implements OnInit {
   constructor(public powerUpsService: PowerUpsService) { }
 
   ngOnInit(): void {
-    this.powerUpsService.powerUps.sort( (a,b) => ~(parseInt(a.usesLeft) - parseInt(b.usesLeft)))
+    this.sortPowerUps();
+  }
+
+  sortPowerUps() {
+    this.powerUpsService.powerUps.sort( (a,b) => ~(parseInt(a.usesLeft) - parseInt(b.usesLeft)));
   }
 
 }
