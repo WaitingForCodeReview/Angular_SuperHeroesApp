@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {HeroInfo} from "../../interfaces.config";
-import {HeroesService} from "../../heroes.service";
+import { Component, Input, OnInit } from '@angular/core';
+import { HeroInfo } from "../../interfaces.config";
+import { HeroesService } from "../../heroes.service";
 
 @Component({
   selector: 'app-hero-card',
@@ -26,11 +26,13 @@ export class HeroCardComponent implements OnInit {
   }
 
   removeHeroFromOwned(): void {
+    const heroName: string = this.hero.name;
+
     this.isOwned = false;
-    this.heroesService.ownedHeroes = this.heroesService.ownedHeroes.filter( (item) => {
-      return item.name !== this.hero.name;
-    });
-    this.heroesService.lastSelectedHero = null;
+    this.heroesService.removeFromOwned(heroName);
+    if (heroName === this.heroesService.lastSelectedHero.name) {
+      this.heroesService.resetLastSelectedHero();
+    }
     this.initOwnedHeroLocalSt();
   }
 
@@ -48,4 +50,14 @@ export class HeroCardComponent implements OnInit {
     } catch (error) { }
   }
 
+  buttonValue(): string {
+    return this.isOwned ? this.isLastSelected() ? 'SELECTED' : 'OWNED' : 'SELECT';
+  }
+
+  isLastSelected(): boolean {
+    if (this.heroesService.lastSelectedHero) {
+      return this.hero.name === this.heroesService.lastSelectedHero.name;
+    }
+    return false
+  }
 }

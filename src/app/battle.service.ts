@@ -1,21 +1,34 @@
 import { Injectable } from '@angular/core';
-import {BattleInfo} from "./interfaces.config";
+import { BattleInfo } from "./interfaces.config";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BattleService {
 
-  battles: Array<BattleInfo> = new Array<BattleInfo>()
+  battles: BattleInfo[] = new Array<BattleInfo>()
 
-  constructor() {
-    this.initBattles();
+  sort(sortBy: string): void {
+    switch (sortBy) {
+      case 'date':
+        this.battles.sort( (a,b) =>  a.battleDateTime - b.battleDateTime);
+        break;
+
+      case 'heroName':
+      case 'enemyName':
+        this.battles.sort( (a,b) => a[sortBy].localeCompare(b[sortBy]) );
+        break;
+
+      case 'battleResult':
+        this.battles.sort( (a,b) => b.battleResult.localeCompare(a.battleResult) );
+        break;
+    }
   }
 
   // TEST FUNCTION
   initBattles(): void {
     // TEST FAKE-BATTLES FOR TEST TAB ONLY
-    this.battles = [ ...this.battles,
+    this.battles = [
       {
         battleDateTime: new Date(),
         heroName: 'Spider Man',

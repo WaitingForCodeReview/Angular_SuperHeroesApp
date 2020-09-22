@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {PowerUpsService} from "../../power-ups.service";
+import { PowerUpsService } from "../../power-ups.service";
+import { AppConfig } from "../../app-config";
 
 @Component({
   selector: 'app-power-ups-tab',
@@ -8,6 +9,8 @@ import {PowerUpsService} from "../../power-ups.service";
 })
 export class PowerUpsTabComponent implements OnInit {
 
+  trackByFn = AppConfig.trackByFn;
+
   constructor(public powerUpsService: PowerUpsService) { }
 
   ngOnInit(): void {
@@ -15,7 +18,7 @@ export class PowerUpsTabComponent implements OnInit {
   }
 
   sortPowerUps() {
-    this.powerUpsService.powerUps.sort( (a,b) => ~(parseInt(a.usesLeft) - parseInt(b.usesLeft)));
+    this.powerUpsService.sort();
   }
 
 }

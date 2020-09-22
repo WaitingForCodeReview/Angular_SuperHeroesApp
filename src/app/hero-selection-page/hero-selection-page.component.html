@@ -9,7 +9,7 @@
 
     <div class="dropDownLetters" *ngIf="showAlphabetical">
       <app-alphabetical-select
-        *ngFor="let letter of alphabet"
+        *ngFor="let letter of alphabet; trackBy: trackByFn"
         [letter]="letter"
         (click)="letterClicked(letter)"
       ></app-alphabetical-select>
@@ -26,7 +26,7 @@
 
   <div id="recentSearches">
     <app-recent-search
-    *ngFor="let search of recentSearches"
+    *ngFor="let search of recentSearches; trackBy: trackByFn"
     [search]="search"
     (click)="searchByRecent($event)"
     ></app-recent-search>
@@ -34,7 +34,7 @@
 
   <div id="cardDiv">
     <app-hero-card
-      *ngFor="let hero of heroesService.heroes"
+      *ngFor="let hero of heroesService.heroes; trackBy: trackByFn"
       [hero]="hero"
     ></app-hero-card>
   </div>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {BattleService} from "../../battle.service";
+import { BattleService } from "../../battle.service";
+import { AppConfig } from "../../app-config";
+
 
 @Component({
   selector: 'app-history-tab',
@@ -8,25 +10,28 @@ import {BattleService} from "../../battle.service";
 })
 export class HistoryTabComponent implements OnInit {
 
-  constructor(public battleService: BattleService) { }
+  trackByFn = AppConfig.trackByFn;
+
+  constructor(public battleService: BattleService) {}
 
   ngOnInit(): void {
+    this.battleService.initBattles();
   }
 
-  dateSort(): any {
-    this.battleService.battles.sort( (a,b) =>  a.battleDateTime - b.battleDateTime);
+  dateSort(): void {
+    this.battleService.sort('date');
   }
 
   heroNameSort(): void {
-    this.battleService.battles.sort( (a,b) => a.heroName.localeCompare(b.heroName) );
+    this.battleService.sort('heroName');
   }
 
   enemyNameSort(): void {
-    this.battleService.battles.sort( (a,b) => a.enemyName.localeCompare(b.enemyName) );
+    this.battleService.sort('enemyName');
   }
 
   battleResultSort(): void {
-    this.battleService.battles.sort( (a,b) => ~(a.battleResult.localeCompare(b.battleResult)) );
+    this.battleService.sort('battleResult');
   }
 
 }

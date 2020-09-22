@@ -1,6 +1,6 @@
-import {FormControl} from "@angular/forms";
-import {RegexpConfig} from "./user-create-page/regexp.config";
-import {AppComponent} from "./app.component";
+import { FormControl } from "@angular/forms";
+import { RegexpConfig } from "./user-create-page/regexp.config";
+import { AppComponent } from "./app.component";
 
 export interface ErrorObj { [key: string]: boolean }
 

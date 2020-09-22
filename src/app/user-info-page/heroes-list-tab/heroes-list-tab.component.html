@@ -10,7 +10,7 @@
   </div>
 
   <app-hero-card
-    *ngFor="let ownedHero of heroesService.ownedHeroes"
+    *ngFor="let ownedHero of heroesService.ownedHeroes; trackBy: trackByFn"
     [hero]="ownedHero"
   ></app-hero-card>
 

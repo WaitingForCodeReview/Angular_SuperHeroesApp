@@ -25,7 +25,7 @@ export interface ApiResponse {
   response: string,
   error?: string
   'results-for'?: string,
-  results?: Array<Object>
+  results?: any
 }
 
 export interface BattleInfo {

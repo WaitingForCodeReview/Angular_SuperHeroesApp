@@ -5,7 +5,7 @@
     <th (click)="enemyNameSort()">Enemy name</th>
     <th (click)="battleResultSort()">Battle result</th>
   </tr>
-  <tr *ngFor="let battle of battleService.battles">
+  <tr *ngFor="let battle of battleService.battles; trackBy: trackByFn">
     <td>{{ battle.battleDateTime | date: 'medium'}}</td>
     <td>{{ battle.heroName }}</td>
     <td>{{ battle.enemyName }}</td>

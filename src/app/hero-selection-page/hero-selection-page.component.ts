@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {UserCreateValidators} from "../user-create.validators";
-import {HeroesService} from "../heroes.service";
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { UserCreateValidators } from "../user-create.validators";
+import { HeroesService } from "../heroes.service";
+import { AppConfig } from "../app-config";
 
 
 @Component({
@@ -16,6 +17,7 @@ export class HeroSelectionPageComponent implements OnInit {
   showAlphabetical: boolean = false
   alphabet: string[] = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
   circleLetter: string = 'a';
+  trackByFn = AppConfig.trackByFn;
 
   constructor(public heroesService: HeroesService) {}
 
@@ -51,6 +53,7 @@ export class HeroSelectionPageComponent implements OnInit {
       const url = this.heroesService.getUrl(heroSearchValue);
 
       this.heroesService.lastSearch = heroSearchValue;
+      this.heroesService.setLastSearchLocalStorage();
       this.heroesService.getHeroes(url).add( () => {
         if (this.heroesService.searchSucceed) {
           this.updateRecentSearches(heroSearchValue);
@@ -77,6 +80,7 @@ export class HeroSelectionPageComponent implements OnInit {
     this.showAlphabetical = false;
     this.form.controls.heroSearch.setValue(letter);
     this.heroesService.lastSearch = letter;
+    this.heroesService.setLastSearchLocalStorage();
   }
 
   hideUnhideAlphabetical() {
