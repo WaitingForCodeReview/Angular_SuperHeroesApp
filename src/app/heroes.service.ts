@@ -5,6 +5,7 @@ import { Subscription } from "rxjs";
 
 function Hero(apiObj) {
   Object.assign(this, {
+    id: apiObj.id,
     name: apiObj.name,
     imageUrl: apiObj.image.url,
     powerStats: {

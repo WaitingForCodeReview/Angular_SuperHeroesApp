@@ -7,8 +7,18 @@
   </tr>
   <tr *ngFor="let battle of battleService.battles; trackBy: trackByFn">
     <td>{{ battle.battleDateTime | date: 'medium'}}</td>
-    <td>{{ battle.heroName }}</td>
-    <td>{{ battle.enemyName }}</td>
+    <td
+      class="link"
+      (click)="heroInfoService.redirectToHeroInfo(battle.heroId)"
+    >
+      {{ battle.heroName }}
+    </td>
+    <td
+      class="link"
+      (click)="heroInfoService.redirectToHeroInfo(battle.enemyId)"
+    >
+      {{ battle.enemyName }}
+    </td>
     <td>{{ battle.battleResult }}</td>
   </tr>
 </table>

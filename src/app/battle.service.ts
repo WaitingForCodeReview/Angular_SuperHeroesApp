@@ -32,25 +32,33 @@ export class BattleService {
       {
         battleDateTime: new Date(),
         heroName: 'Spider Man',
+        heroId: '1',
         enemyName: 'Batman',
+        enemyId: '2',
         battleResult: 'WON',
       },
       {
         battleDateTime: new Date(Date.now() - 1111),
         heroName: 'Superman',
+        heroId: '3',
         enemyName: 'Big John',
+        enemyId: '4',
         battleResult: 'LOST',
       },
       {
         battleDateTime: new Date(Date.now() + 9999),
         heroName: 'A-Bomb',
+        heroId: '5',
         enemyName: 'Enemy',
+        enemyId: '6',
         battleResult: 'WON',
       },
       {
         battleDateTime: new Date(Date.now() - 9999),
         heroName: 'SuperGirl',
+        heroId: '7',
         enemyName: 'Enemy2',
+        enemyId: '8',
         battleResult: 'WON',
       },
     ]
