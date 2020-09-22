@@ -11,9 +11,10 @@
   color: orange;
 }
 .heroCard .imgDiv {
-  width: 25%;
+  width: 40%;
 }
 .heroCard .imgDiv img{
+  width: 100%;
   height: 100%;
   border-radius: 7px;
 }
@@ -48,3 +49,19 @@ a.selectButton {
   transition: .2s ease-in-out;
 }
 
+.buttonDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+  margin-bottom: 6%;
+}
+.flex {
+  display: flex;
+  flex-direction: column;
+}

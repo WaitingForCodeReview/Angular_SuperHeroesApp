@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PowerUpsService } from "../../power-ups.service";
+import { AppConfig } from "../../app-config";
 
 @Component({
   selector: 'app-power-ups-tab',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PowerUpsTabComponent implements OnInit {
 
-  constructor() { }
+  trackByFn = AppConfig.trackByFn;
+
+  constructor(public powerUpsService: PowerUpsService) { }
 
   ngOnInit(): void {
+    this.sortPowerUps();
+  }
+
+  sortPowerUps() {
+    this.powerUpsService.sort();
   }
 
 }

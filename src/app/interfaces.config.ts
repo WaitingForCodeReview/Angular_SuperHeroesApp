@@ -25,5 +25,20 @@ export interface ApiResponse {
   response: string,
   error?: string
   'results-for'?: string,
-  results?: Array<Object>
+  results?: any
+}
+
+export interface BattleInfo {
+  battleDateTime: any,
+  heroName: string,
+  enemyName: string,
+  battleResult: string,
+}
+
+export interface PowerUp {
+  title: string,
+  powerStatName: string,
+  powerStatUpgradeValue: string,
+  usesLeft: string,
+  imgUrl: string,
 }

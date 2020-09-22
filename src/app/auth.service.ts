@@ -1,5 +1,5 @@
-import {Injectable} from "@angular/core";
-import {FormData} from "./interfaces.config";
+import { Injectable } from "@angular/core";
+import { FormData } from "./interfaces.config";
 
 @Injectable({providedIn: 'root'})
 export class AuthService {

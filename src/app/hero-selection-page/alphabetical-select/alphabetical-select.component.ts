@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {HeroesService} from "../../heroes.service";
+import { Component, Input, OnInit } from '@angular/core';
+import { HeroesService } from "../../heroes.service";
 
 @Component({
   selector: 'app-alphabetical-select',

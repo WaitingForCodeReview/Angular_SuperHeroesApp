@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {HeroesService} from "../heroes.service";
 
 @Component({
   selector: 'app-main-layout',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainLayoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private heroesService: HeroesService) { }
 
   ngOnInit(): void {
+    this.heroesService.initOwnedHeroesLocalStorage();
+    this.heroesService.initSearchedHeroesLocalStorage();
+    this.heroesService.initLastSearchLocalStorage();
   }
 
 }

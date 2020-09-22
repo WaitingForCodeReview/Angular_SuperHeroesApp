@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {FormData} from "./interfaces.config";
+import { FormData } from "./interfaces.config";
 
 @Component({
   selector: 'app-root',
