@@ -7,8 +7,8 @@ import { AuthGuard } from "./auth.guard";
 import { HeroSelectionPageComponent } from "./hero-selection-page/hero-selection-page.component";
 import { UserInfoComponent } from "./user-info-page/user-info/user-info.component";
 import { HeroInfoComponent } from "./hero-info-page/hero-info/hero-info.component";
-import {HeroBattleComponent} from "./heroes-battle-page/hero-battle/hero-battle.component";
-import {BattleAccessGuard} from "./battle-access.guard";
+import { HeroBattleComponent } from "./heroes-battle-page/hero-battle/hero-battle.component";
+import { BattleAccessGuard } from "./battle-access.guard";
 
 const routes: Routes = [
   //http://localhost::4200/ --> sign-in page
