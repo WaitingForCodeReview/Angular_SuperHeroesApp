@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 import { ApiObject} from "../interfaces.config";
 import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -31,14 +32,7 @@ export class HeroInfoService {
     return `https://www.superheroapi.com/api.php/${this.accessToken}/${this.heroSearchId}`;
   }
 
-  getHero(url: string = this.getUrl()): void {
-    this.http.get<ApiObject>(url)
-      .subscribe(gotApiHeroesObj => {
-        if (gotApiHeroesObj.response === "success") {
-          this.heroInfo = {
-            ...gotApiHeroesObj,
-          }
-        }
-      });
+  getHero(url: string = this.getUrl()): Observable<ApiObject> {
+    return this.http.get<ApiObject>(url);
   }
 }

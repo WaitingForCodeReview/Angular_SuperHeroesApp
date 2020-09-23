@@ -18,6 +18,7 @@ import { PowerUpsTabComponent } from "./user-info-page/power-ups-tab/power-ups-t
 import { HistoryTabComponent } from "./user-info-page/history-tab/history-tab.component";
 import { CommonModule } from "@angular/common";
 import { HeroInfoComponent } from './hero-info-page/hero-info/hero-info.component';
+import { HeroBattleComponent } from './heroes-battle-page/hero-battle/hero-battle.component';
 
 @NgModule({
     declarations: [
@@ -34,6 +35,7 @@ import { HeroInfoComponent } from './hero-info-page/hero-info/hero-info.componen
         HistoryTabComponent,
         PowerUpsTabComponent,
         HeroInfoComponent,
+        HeroBattleComponent,
     ],
   imports: [
     BrowserModule,

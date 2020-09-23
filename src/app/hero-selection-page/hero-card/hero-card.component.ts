@@ -27,6 +27,7 @@ export class HeroCardComponent implements OnInit {
     this.heroesService.ownedHeroes = [ ...this.heroesService.ownedHeroes, this.hero ];
     this.heroesService.lastSelectedHero = this.hero;
     this.initOwnedHeroLocalSt();
+    this.heroesService.setEnemyHero()
   }
 
   removeHeroFromOwned(): void {
@@ -38,6 +39,7 @@ export class HeroCardComponent implements OnInit {
       this.heroesService.resetLastSelectedHero();
     }
     this.initOwnedHeroLocalSt();
+    this.heroesService.setEnemyHero()
   }
 
   initOwnedHeroLocalSt(): void {

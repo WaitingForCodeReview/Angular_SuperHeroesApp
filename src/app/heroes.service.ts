@@ -24,6 +24,7 @@ export class HeroesService {
   heroes: Array<HeroInfo> = new Array<HeroInfo>()
   ownedHeroes: Array<HeroInfo> = new Array<HeroInfo>()
   lastSelectedHero: HeroInfo
+  enemyHero: HeroInfo
   lastSearch: string = ''
 
   constructor(private http: HttpClient) {}
@@ -57,12 +58,14 @@ export class HeroesService {
       }
     })
 
+    this.setEnemyHero()
     this.setSearchedHeroesLocalStorage();
   }
 
   initOwnedHeroesLocalStorage(): void {
     try {
       this.ownedHeroes = JSON.parse(localStorage["currentUser"]).ownedHeroes;
+      this.lastSelectedHero = JSON.parse(localStorage["currentUser"]).lastSelectedHero;
     } catch (error) {}
   }
 
@@ -81,6 +84,7 @@ export class HeroesService {
   initSearchedHeroesLocalStorage(): void {
     try {
       this.heroes = JSON.parse(localStorage["currentUser"]).searchedHeroes;
+      this.setEnemyHero()
     } catch (error) {}
   }
 
@@ -102,5 +106,18 @@ export class HeroesService {
       ...JSON.parse(localStorage["currentUser"]),
       lastSearch: this.lastSearch,
     })
+  }
+
+  setEnemyHero() {
+    try {
+      do {
+        this.enemyHero = this.heroes[Math.floor(Math.random() * (this.heroes.length))];
+      } while (this.enemyHero.name === this.lastSelectedHero.name)
+
+      localStorage["currentUser"] = JSON.stringify({
+        ...JSON.parse(localStorage["currentUser"]),
+        enemyHero: this.enemyHero,
+      })
+    } catch (error) {}
   }
 }

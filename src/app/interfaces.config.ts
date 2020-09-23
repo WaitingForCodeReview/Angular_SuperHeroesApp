@@ -96,3 +96,8 @@ export interface ApiObject {
     url: string
   }
 }
+
+export interface BattleResults {
+  userScore: number,
+  enemyScore: number,
+}

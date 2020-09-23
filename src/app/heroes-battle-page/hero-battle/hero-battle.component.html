@@ -1,0 +1,93 @@
+<div
+  class="loader"
+  *ngIf="showLoader"
+>
+  <div class="centerLoader">
+    <div class="lds-hourglass"></div>
+  </div>
+</div>
+
+<div
+  class="modal"
+  *ngIf="showModal"
+>
+  <div class="modalContent">
+    <h1>Battle results :</h1>
+    <p>Battle Time: {{ battleService.currentBattle.battleDateTime | date: 'medium' }}</p>
+    <p>User hero-name: {{ battleService.currentBattle.heroName }}</p>
+    <p>Enemy hero-name: {{ battleService.currentBattle.enemyName }}</p>
+    <p>Result: {{ battleService.currentBattle.battleResult }}</p>
+    <a class="buttonOk" (click)="hideModal()">OK</a>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="content">
+
+    <div class="imgDiv">
+      <img
+        src="{{ battleService.userHero.imageUrl }}" alt="{{ battleService.userHero.name }}"
+        (click)="heroInfoService.redirectToHeroInfo(battleService.userHero.id)"
+      >
+    </div>
+
+    <div class="textDiv">
+      <h1>{{ battleService.userHero.name }}</h1>
+      <p>intelligence: {{ battleService.userHero.powerStats.intelligence }}</p>
+      <p>strength: {{ battleService.userHero.powerStats.strength }}</p>
+      <p>speed: {{ battleService.userHero.powerStats.speed }}</p>
+      <p>durability: {{ battleService.userHero.powerStats.durability }}</p>
+      <p>power: {{ battleService.userHero.powerStats.power }}</p>
+      <p>combat: {{ battleService.userHero.powerStats.combat }}</p>
+    </div>
+
+  </div>
+
+  <div class="content">
+
+    <div class="textDiv">
+      <h1 class="align glow">{{ battleService.userHero.name }}</h1>
+      <p class="align glow">VS</p>
+      <h1 class="align glow">{{ battleService.enemyHero.name }}</h1>
+    </div>
+
+    <div class="btnDiv">
+      <a class="btnFight" (click)="fightButtonClicked()">FIGHT</a>
+    </div>
+
+    <div class="powerUpsDiv">
+      <h1>Power Ups:</h1>
+      <p
+        *ngFor="let powerUp of availablePowerUps"
+         (click)="powerUpClicked(powerUp)"
+        [ngClass]="{selected: needsColor(powerUp)}"
+      >
+        {{ powerUp.title }} ({{ powerUp.usesLeft }} left)
+      </p>
+    </div>
+
+  </div>
+
+  <div class="content">
+
+    <div class="imgDiv">
+      <img
+        src="{{ battleService.enemyHero.imageUrl }}" alt="{{ battleService.enemyHero.name }}"
+        (click)="heroInfoService.redirectToHeroInfo(battleService.enemyHero.id)"
+      >
+    </div>
+
+    <div class="textDiv">
+      <h1>{{ battleService.enemyHero.name }}</h1>
+      <p>intelligence: {{ battleService.enemyHero.powerStats.intelligence }}</p>
+      <p>strength: {{ battleService.enemyHero.powerStats.strength }}</p>
+      <p>speed: {{ battleService.enemyHero.powerStats.speed }}</p>
+      <p>durability: {{ battleService.enemyHero.powerStats.durability }}</p>
+      <p>power: {{ battleService.enemyHero.powerStats.power }}</p>
+      <p>combat: {{ battleService.enemyHero.powerStats.combat }}</p>
+    </div>
+
+  </div>
+
+</div>

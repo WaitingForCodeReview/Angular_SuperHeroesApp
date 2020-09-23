@@ -24,7 +24,14 @@ export class HeroInfoComponent implements OnInit {
       .subscribe(params => {
         this.heroInfoService.heroSearchId = params['hero_id'];
       });
-    this.heroInfoService.getHero();
+    this.heroInfoService.getHero()
+      .subscribe(gotApiHeroesObj => {
+        if (gotApiHeroesObj.response === "success") {
+          this.heroInfoService.heroInfo = {
+            ...gotApiHeroesObj,
+          }
+        }
+      });
   }
 
 }
