@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { HeroInfo } from "../../interfaces.config";
 import { HeroesService } from "../../heroes.service";
+import { HeroInfoService } from "../../hero-info-page/hero-info.service";
 
 @Component({
   selector: 'app-hero-card',
@@ -12,7 +13,10 @@ export class HeroCardComponent implements OnInit {
 
   isOwned: boolean
 
-  constructor(public heroesService: HeroesService) {}
+  constructor(
+    public heroesService: HeroesService,
+    public heroInfoService: HeroInfoService
+  ) {}
 
   ngOnInit(): void {
     this.checkOwned();
@@ -60,4 +64,5 @@ export class HeroCardComponent implements OnInit {
     }
     return false
   }
+
 }

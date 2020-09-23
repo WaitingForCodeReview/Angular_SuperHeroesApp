@@ -1,0 +1,41 @@
+<div class="container">
+
+  <div class="imgDiv">
+    <img src="{{ heroInfoService.heroInfo.image.url }}" alt="">
+  </div>
+
+  <div class="textDiv">
+
+    <h1> {{ heroInfoService.heroInfo.name }} </h1>
+
+    <p>intelligence: {{ heroInfoService.heroInfo.powerstats.intelligence }}</p>
+    <p>strength: {{ heroInfoService.heroInfo.powerstats.strength }}</p>
+    <p>speed: {{ heroInfoService.heroInfo.powerstats.speed }}</p>
+    <p>durability: {{ heroInfoService.heroInfo.powerstats.durability }}</p>
+    <p>power: {{ heroInfoService.heroInfo.powerstats.power }}</p>
+    <p>combat: {{ heroInfoService.heroInfo.powerstats.combat }}</p>
+
+    <hr>
+
+    <p>Full Name: {{ heroInfoService.heroInfo.biography["full-name"] }} </p>
+    <p>Alter Egos: {{ heroInfoService.heroInfo.biography["alter-egos"] }} </p>
+    <p>Place of birth: {{ heroInfoService.heroInfo.biography["place-of-birth"] }} </p>
+    <p>Alignment: {{ heroInfoService.heroInfo.biography["alignment"] }} </p>
+
+    <hr>
+
+    <p>Gender: {{ heroInfoService.heroInfo.appearance["gender"] }} </p>
+    <p>Race: {{ heroInfoService.heroInfo.appearance["race"] }} </p>
+    <p>Height: {{ heroInfoService.heroInfo.appearance["height"][0] }} </p>
+    <p>Weight: {{ heroInfoService.heroInfo.appearance["weight"][0] }} </p>
+
+    <hr>
+
+    <p>Relatives: {{ heroInfoService.heroInfo.connections["relatives"] }} </p>
+    <p>Occupation: {{ heroInfoService.heroInfo.work["occupation"] }} </p>
+    <p>Group-affiliation: {{ heroInfoService.heroInfo.connections["group-affiliation"] }} </p>
+    <p>Base: {{ heroInfoService.heroInfo.work["base"] }} </p>
+
+  </div>
+
+</div>

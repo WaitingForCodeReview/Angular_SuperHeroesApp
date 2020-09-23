@@ -6,6 +6,7 @@ import { MainLayoutComponent } from "./main-layout/main-layout.component";
 import { AuthGuard } from "./auth.guard";
 import { HeroSelectionPageComponent } from "./hero-selection-page/hero-selection-page.component";
 import { UserInfoComponent } from "./user-info-page/user-info/user-info.component";
+import { HeroInfoComponent } from "./hero-info-page/hero-info/hero-info.component";
 
 const routes: Routes = [
   //http://localhost::4200/ --> sign-in page
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path: 'create-new-user', component: UserCreatePageComponent},
   {path: 'main', component: MainLayoutComponent, canActivate: [AuthGuard], children: [
       {path: 'hero-selection', component: HeroSelectionPageComponent},
-      {path: 'user-info', component: UserInfoComponent}
+      {path: 'user-info', component: UserInfoComponent},
+      {path: 'hero-info', component: HeroInfoComponent},
     ]},
 ];
 

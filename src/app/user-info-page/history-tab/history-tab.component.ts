@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BattleService } from "../../battle.service";
 import { AppConfig } from "../../app-config";
+import { HeroInfoService } from "../../hero-info-page/hero-info.service";
 
 
 @Component({
@@ -12,7 +13,10 @@ export class HistoryTabComponent implements OnInit {
 
   trackByFn = AppConfig.trackByFn;
 
-  constructor(public battleService: BattleService) {}
+  constructor(
+    public battleService: BattleService,
+    public heroInfoService: HeroInfoService
+  ) {}
 
   ngOnInit(): void {
     this.battleService.initBattles();
