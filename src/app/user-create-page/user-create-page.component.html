@@ -1,0 +1,75 @@
+<div id="signUpForm">
+  <div class="form">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+      <h2>Create new user</h2>
+
+      <div class = "input-box">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <input type="text" placeholder="Username" formControlName="userName">
+        <div
+          *ngIf="invalidAndTouched('userName')"
+          class="validation"
+        >
+          <small
+            *ngIf="isEmpty('userName')"
+          >User name field can not be empty</small>
+          <small
+            *ngIf="minLength('userName')"
+          >User name minimal length is {{minLength('userName').requiredLength}}. <br> Current length : {{minLength('userName').actualLength}}<br></small>
+          <small
+            *ngIf="invalidFormat('userName')"
+          >Invalid username format</small>
+        </div>
+      </div>
+
+      <div class = "input-box">
+        <i class="fa fa-user" aria-hidden="true"></i>
+        <input type="text" placeholder="E-mail" formControlName="email">
+        <div
+          *ngIf="invalidAndTouched('email')"
+          class="validation"
+        >
+          <small
+            *ngIf="isEmpty('email')"
+          >E-mail field can not be empty</small>
+          <small
+            *ngIf="invalidFormat('email')"
+          >Invalid e-mail format</small>
+          <small
+            *ngIf="isNotUnique('email')"
+          >User with such email already exists</small>
+        </div>
+      </div>
+
+      <div class = "input-box">
+        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+        <input type="password" placeholder="Password" formControlName="password">
+        <div
+          *ngIf="invalidAndTouched('password')"
+          class="validation"
+        >
+          <small
+            *ngIf="isEmpty('password')"
+          >Password field can not be empty</small>
+          <small
+            *ngIf="minLength('password')"
+          >Password minimal length is {{minLength('password').requiredLength}}. <br> Current length : {{minLength('password').actualLength}}<br></small>
+          <small
+            *ngIf="foundCoincidence('password')"
+          >Password should not contain parts of user name or email<br></small>
+          <small
+            *ngIf="invalidFormat('password')"
+          >Invalid password format</small>
+        </div>
+      </div>
+
+      <div class = "input-box">
+        <input type="submit"  [disabled]="form.invalid" value="Create new user">
+      </div>
+
+      <a routerLink="/sign-in">Sign in</a>
+
+    </form>
+  </div>
+</div>

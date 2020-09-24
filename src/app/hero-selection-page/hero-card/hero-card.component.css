@@ -1,0 +1,67 @@
+.heroCard {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  background: rgba(128,0,128, 0.8);
+  height: 300px;
+  border-radius: 7px;
+  padding: 1%;
+  margin-top: 2%;
+  margin-left: 8%;
+  color: orange;
+}
+.heroCard .imgDiv {
+  width: 40%;
+}
+.heroCard .imgDiv img{
+  width: 100%;
+  height: 100%;
+  border-radius: 7px;
+}
+.heroCard .textDiv {
+  height: 100%;
+}
+.heroCard .textDiv h1{
+  padding: 5px;
+}
+.heroCard .textDiv p{
+  font-weight: bold;
+  font-size: 20px;
+  padding-top: 3px;
+}
+a.selectButton {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  font-size: 90%;
+  font-weight: 700;
+  color: rgb(209,209,217);
+  text-decoration: none;
+  text-shadow: 0 -1px 2px rgba(0,0,0,.2);
+  padding: .5em 1em;
+  outline: none;
+  border-radius: 3px;
+  background: linear-gradient(rgb(110,112,120), rgb(81,81,86)) rgb(110,112,120);
+  box-shadow:
+    0 1px rgba(255,255,255,.2) inset,
+    0 3px 5px rgba(0,1,6,.5),
+    0 0 1px 1px rgba(0,1,6,.2);
+  transition: .2s ease-in-out;
+}
+
+.buttonDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+button {
+  background: none;
+  border: none;
+  outline: none;
+  margin-bottom: 6%;
+}
+.flex {
+  display: flex;
+  flex-direction: column;
+}

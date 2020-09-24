@@ -1,0 +1,32 @@
+<div class="heroCard">
+
+  <div class="imgDiv">
+    <img src="{{ hero.imageUrl }}" alt="{{ hero.name }}">
+  </div>
+
+  <div class="textDiv">
+    <h1>{{ hero.name }}</h1>
+    <p>intelligence: {{ hero.powerStats.intelligence }}</p>
+    <p>strength: {{ hero.powerStats.strength }}</p>
+    <p>speed: {{ hero.powerStats.speed }}</p>
+    <p>durability: {{ hero.powerStats.durability }}</p>
+    <p>power: {{ hero.powerStats.power }}</p>
+    <p>combat: {{ hero.powerStats.combat }}</p>
+  </div>
+
+  <div class="buttonDiv">
+
+    <div class="flex">
+      <button [disabled]="isOwned" (click)="addHeroToOwned()"><a class="selectButton">{{ buttonValue() }}</a></button>
+      <button *ngIf="isOwned" (click)="removeHeroFromOwned()"><a class="selectButton">REMOVE</a></button>
+    </div>
+
+    <div>
+      <button (click)="heroInfoService.redirectToHeroInfo(hero.id)"><a class="selectButton">View Hero</a></button>
+    </div>
+
+  </div>
+
+
+
+</div>

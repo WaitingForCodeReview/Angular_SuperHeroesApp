@@ -1,0 +1,24 @@
+<table>
+  <tr>
+    <th (click)="dateSort()">Battle date</th>
+    <th (click)="heroNameSort()">Hero Name</th>
+    <th (click)="enemyNameSort()">Enemy name</th>
+    <th (click)="battleResultSort()">Battle result</th>
+  </tr>
+  <tr *ngFor="let battle of battleService.battles; trackBy: trackByFn">
+    <td>{{ battle.battleDateTime | date: 'medium'}}</td>
+    <td
+      class="link"
+      (click)="heroInfoService.redirectToHeroInfo(battle.heroId)"
+    >
+      {{ battle.heroName }}
+    </td>
+    <td
+      class="link"
+      (click)="heroInfoService.redirectToHeroInfo(battle.enemyId)"
+    >
+      {{ battle.enemyName }}
+    </td>
+    <td>{{ battle.battleResult }}</td>
+  </tr>
+</table>

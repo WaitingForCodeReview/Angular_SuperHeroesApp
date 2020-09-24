@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+  margin-left: 24%;
+  margin-right: 24%;
+  margin-top: 1%;
+  width: 50%;
+}
+.empty {
+  font-size: 30px;
+  color: white;
+  font-weight: bold;
+}
+
+img {
+  width: 25%;
+  height: 25%;
+  cursor: pointer;
+}
+
+.lastHero {
+  margin-left: 75%;
+  margin-top: -28%;
+}

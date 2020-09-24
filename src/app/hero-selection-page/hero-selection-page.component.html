@@ -1,0 +1,50 @@
+<div
+  class="modal"
+  *ngIf="showModal()"
+>
+  <p>You don't have any <br> heroes to fight!</p>
+  <p>Please, choose heroes <br> here and go FIGHT</p>
+</div>
+
+<div id="container">
+
+  <div class="input-div">
+
+
+    <div class="circleAlph" (click)="hideUnhideAlphabetical()">
+      <p>{{ circleLetter }}</p>
+    </div>
+
+    <div class="dropDownLetters" *ngIf="showAlphabetical">
+      <app-alphabetical-select
+        *ngFor="let letter of alphabet; trackBy: trackByFn"
+        [letter]="letter"
+        (click)="letterClicked(letter)"
+      ></app-alphabetical-select>
+    </div>
+
+    <div>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <input type="text" placeholder="Enter search" formControlName="heroSearch">
+        <button type="submit" [disabled]="form.invalid"> <i class="fas fa-search"></i> </button>
+      </form>
+    </div>
+
+  </div>
+
+  <div id="recentSearches">
+    <app-recent-search
+    *ngFor="let search of recentSearches; trackBy: trackByFn"
+    [search]="search"
+    (click)="searchByRecent($event)"
+    ></app-recent-search>
+  </div>
+
+  <div id="cardDiv">
+    <app-hero-card
+      *ngFor="let hero of heroesService.heroes; trackBy: trackByFn"
+      [hero]="hero"
+    ></app-hero-card>
+  </div>
+
+</div>

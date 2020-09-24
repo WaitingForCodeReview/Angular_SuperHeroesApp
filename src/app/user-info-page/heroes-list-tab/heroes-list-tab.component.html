@@ -1,0 +1,27 @@
+<div>
+
+  <div
+    *ngIf="!heroesService.ownedHeroes.length"
+    class="container"
+    class="empty"
+  >
+    <p>Oooops....... You dont have any owned heroes.....</p>
+    <p>Press '+' button and add your favourite heroes!</p>
+  </div>
+
+  <app-hero-card
+    *ngFor="let ownedHero of heroesService.ownedHeroes; trackBy: trackByFn"
+    [hero]="ownedHero"
+  ></app-hero-card>
+
+  <div class="container" [ngClass]="{ lastHero: heroesService.ownedHeroes.length }">
+
+    <img
+      src="https://www.iconfinder.com/data/icons/color-bold-style/21/04-512.png"
+      alt="plusIcon"
+      (click)="redirectToHeroSelect()"
+    >
+
+  </div>
+
+</div>

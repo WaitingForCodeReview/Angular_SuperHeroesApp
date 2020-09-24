@@ -1,0 +1,33 @@
+.powerUpCard {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background: rgba(128,0,128, 0.8);
+  height: 300px;
+  border-radius: 7px;
+  padding: 1%;
+  margin-top: 2%;
+  color: orange;
+}
+.powerUpCard .imgDiv {
+  width: 50%;
+}
+.powerUpCard .imgDiv img{
+  width: 98%;
+  height: 100%;
+  border-radius: 7px;
+}
+.powerUpCard .textDiv {
+  height: 100%;
+  width: 50%;
+  text-align: center;
+}
+.powerUpCard .textDiv h1{
+  padding: 5px;
+}
+.powerUpCard .textDiv p{
+  font-weight: bold;
+  font-size: 20px;
+  padding-top: 3px;
+}
+

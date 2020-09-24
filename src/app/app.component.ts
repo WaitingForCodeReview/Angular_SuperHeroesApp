@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormData } from "./interfaces.config";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-superHeroesApp';
+
+  static users: Array<FormData> = localStorage.getItem('users')
+    ? JSON.parse(localStorage.getItem('users'))
+    : [];
 }

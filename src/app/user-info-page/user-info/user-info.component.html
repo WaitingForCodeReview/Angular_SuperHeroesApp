@@ -1,0 +1,13 @@
+<div class="container">
+
+  <a class="tab" (click)="showHeroesListTab()">Heroes List</a>
+  <a class="tab" (click)="showHistoryTab() ">History</a>
+  <a class="tab" (click)="showPowerUpsTab()">Power Ups</a>
+
+</div>
+
+<div [ngSwitch]="tabToShow" class="container">
+  <app-heroes-list-tab *ngSwitchCase="heroesListTab"></app-heroes-list-tab>
+  <app-history-tab *ngSwitchCase="historyTab"></app-history-tab>
+  <app-power-ups-tab *ngSwitchCase="powerUpsTab"></app-power-ups-tab>
+</div>

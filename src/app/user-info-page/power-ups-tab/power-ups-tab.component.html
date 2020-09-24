@@ -1,0 +1,13 @@
+<div class="powerUpCard" *ngFor="let powerUp of powerUpsService.powerUps; trackBy: trackByFn">
+
+  <div class="imgDiv">
+    <img src="{{ powerUp.imgUrl }}" alt="{{ powerUp.title }}">
+  </div>
+
+  <div class="textDiv">
+    <h1>{{ powerUp.title }}</h1>
+    <p>{{ powerUp.powerStatName }}: +{{ powerUp.powerStatUpgradeValue }}</p>
+    <p>Uses left: {{ powerUp.usesLeft }}</p>
+  </div>
+
+</div>
