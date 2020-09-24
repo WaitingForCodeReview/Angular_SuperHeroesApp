@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { UserCreateValidators } from "../user-create.validators";
 import { HeroesService } from "../heroes.service";
 import { AppConfig } from "../app-config";
-import {ActivatedRoute} from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 
 
 @Component({
@@ -79,7 +79,6 @@ export class HeroSelectionPageComponent implements OnInit {
   }
 
   searchByRecent(event): void {
-    console.log(this.noHeroFound)
     const target = event.target;
 
     this.form.controls.heroSearch.setValue(target.innerText);
@@ -99,10 +98,12 @@ export class HeroSelectionPageComponent implements OnInit {
   }
 
   showModal(): boolean {
-    if (this.heroesService.ownedHeroes.length >= 1) {
+    const ownedLength: number = this.heroesService.ownedHeroes.length;
+
+    if (ownedLength) {
       return false;
     }
-    else if (this.heroesService.ownedHeroes.length === 0 && !!this.noHeroFound) {
+    else if (!ownedLength && !!this.noHeroFound) {
       return true;
     }
     return !!this.noHeroFound;

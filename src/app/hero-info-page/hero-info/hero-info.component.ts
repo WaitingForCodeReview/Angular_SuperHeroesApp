@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HeroInfoService } from "../hero-info.service";
 import { ActivatedRoute } from "@angular/router";
+import { ApiResponse } from "../../variables.config";
 
 @Component({
   selector: 'app-hero-info',
@@ -26,7 +27,7 @@ export class HeroInfoComponent implements OnInit {
       });
     this.heroInfoService.getHero()
       .subscribe(gotApiHeroesObj => {
-        if (gotApiHeroesObj.response === "success") {
+        if (gotApiHeroesObj.response === ApiResponse.success) {
           this.heroInfoService.heroInfo = {
             ...gotApiHeroesObj,
           }

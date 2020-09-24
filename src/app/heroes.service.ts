@@ -108,16 +108,24 @@ export class HeroesService {
     })
   }
 
-  setEnemyHero() {
+  setEnemyHero(): void {
     try {
-      do {
-        this.enemyHero = this.heroes[Math.floor(Math.random() * (this.heroes.length))];
-      } while (this.enemyHero.name === this.lastSelectedHero.name)
-
-      localStorage["currentUser"] = JSON.stringify({
-        ...JSON.parse(localStorage["currentUser"]),
-        enemyHero: this.enemyHero,
-      })
+      this.getRandomEnemyHero();
+      this.initEnemyHeroLocalStorage();
     } catch (error) {}
   }
+
+  getRandomEnemyHero(): void {
+    do {
+      this.enemyHero = this.heroes[Math.floor(Math.random() * (this.heroes.length))];
+    } while (this.enemyHero.name === this.lastSelectedHero.name)
+  }
+
+  initEnemyHeroLocalStorage() {
+    localStorage["currentUser"] = JSON.stringify({
+      ...JSON.parse(localStorage["currentUser"]),
+      enemyHero: this.enemyHero,
+    })
+  }
+
 }

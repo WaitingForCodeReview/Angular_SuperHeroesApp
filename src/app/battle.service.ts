@@ -40,27 +40,30 @@ export class BattleService {
   addPowerUp(powerUp: PowerUp): void {
     const powerStatToUpgrade: string = powerUp.powerStatName;
 
-    this.usedInBattlePowerUps = [ ...this.usedInBattlePowerUps, powerUp];
-    this.userHero.powerStats[powerStatToUpgrade] = (parseInt(this.userHero.powerStats[powerStatToUpgrade]) +  parseInt(powerUp.powerStatUpgradeValue)).toString();
+    this.addPowerUpToArray(powerUp)
+    this.remakeHero(powerUp, powerStatToUpgrade, 'upgrade');
   }
 
   removePowerUp(powerUp: PowerUp): void {
     const powerStatToUpgrade: string = powerUp.powerStatName;
 
-    this.usedInBattlePowerUps = this.usedInBattlePowerUps.filter( item => item.title !== powerUp.title);
-    this.userHero.powerStats[powerStatToUpgrade] = (parseInt(this.userHero.powerStats[powerStatToUpgrade]) -  parseInt(powerUp.powerStatUpgradeValue)).toString();
+    this.removePowerUpFromArray(powerUp);
+    this.remakeHero(powerUp, powerStatToUpgrade, 'downgrade');
   }
 
   fight(): void {
+    this.setBattle(this.battleResult());
+    this.refreshPowerUps();
+  }
+
+  battleResult(): string {
     const battleResults: BattleResults = this.compareAllPowerStats();
-    const battleResult: string = (battleResults.userScore === battleResults.enemyScore)
+
+    return (battleResults.userScore === battleResults.enemyScore)
       ? 'DRAW'
       : (battleResults.userScore > battleResults.enemyScore)
         ? 'WON'
         : 'LOST';
-
-    this.setBattle(battleResult);
-    this.refreshPowerUps();
   }
 
   compareAllPowerStats(): BattleResults {
@@ -69,19 +72,20 @@ export class BattleService {
       enemyScore: 0,
     }
 
-    for (let powerStat in this.userHero.powerStats) {
-      if (this.userHero.powerStats.hasOwnProperty(powerStat)) {
+    return this.battleResults(battleResults);
+  }
 
-        const userPSValue: number = parseInt(this.userHero.powerStats[powerStat])
-        const enemyPSValue: number = parseInt(this.enemyHero.powerStats[powerStat]);
+  battleResults(battleResults: BattleResults): BattleResults {
+    Object.keys(this.userHero.powerStats).forEach( powerStat => {
+      const userPSValue: number = parseInt(this.userHero.powerStats[powerStat]);
+      const enemyPSValue: number = parseInt(this.enemyHero.powerStats[powerStat]);
 
-        if (userPSValue > enemyPSValue) {
-          battleResults.userScore++;
-        } else if (userPSValue < enemyPSValue) {
-          battleResults.enemyScore++;
-        }
+      if (userPSValue > enemyPSValue) {
+        battleResults.userScore++;
+      } else if (userPSValue < enemyPSValue) {
+        battleResults.enemyScore++;
       }
-    }
+    });
 
     return battleResults;
   }
@@ -97,7 +101,10 @@ export class BattleService {
     }
 
     this.battles = [...this.battles, this.currentBattle];
+    this.initBattlesLocalStorage();
+  }
 
+  initBattlesLocalStorage(): void {
     localStorage["currentUser"] = JSON.stringify({
       ...JSON.parse(localStorage["currentUser"]),
       battles: this.battles,
@@ -114,13 +121,34 @@ export class BattleService {
     } catch (error) {}
   }
 
-  refreshPowerUps() {
+  refreshPowerUps(): void {
     this.usedInBattlePowerUps.forEach( usedPowerUp => {
       const toDecrease = this.powerUpsService.powerUps.find( powerUp => powerUp.title === usedPowerUp.title);
       toDecrease.usesLeft = (parseInt(toDecrease.usesLeft) - 1).toString();
 
       this.removePowerUp(usedPowerUp);
     })
+  }
+
+  addPowerUpToArray(powerUp: PowerUp): void {
+    this.usedInBattlePowerUps = [ ...this.usedInBattlePowerUps, powerUp];
+  }
+
+  removePowerUpFromArray(powerUp: PowerUp): void {
+    this.usedInBattlePowerUps = this.usedInBattlePowerUps.filter( item => item.title !== powerUp.title);
+  }
+
+  remakeHero(powerUp: PowerUp, powerStatToUpgrade: string, toDo: string): void {
+    switch (toDo) {
+      case 'upgrade':
+        this.userHero.powerStats[powerStatToUpgrade] =
+          (parseInt(this.userHero.powerStats[powerStatToUpgrade]) +  parseInt(powerUp.powerStatUpgradeValue)).toString();
+        break;
+      case 'downgrade':
+        this.userHero.powerStats[powerStatToUpgrade] =
+          (parseInt(this.userHero.powerStats[powerStatToUpgrade]) -  parseInt(powerUp.powerStatUpgradeValue)).toString();
+        break;
+    }
   }
 
 }

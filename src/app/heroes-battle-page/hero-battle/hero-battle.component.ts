@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BattleService } from "../../battle.service";
 import { HeroInfoService } from "../../hero-info-page/hero-info.service";
 import { PowerUp } from "../../interfaces.config";
+import { of } from "rxjs";
+import { delay } from "rxjs/operators";
 
 @Component({
   selector: 'app-hero-battle',
@@ -27,12 +29,12 @@ export class HeroBattleComponent implements OnInit {
 
   initAvailablePowerUps(): void {
     this.availablePowerUps = this.battleService.powerUpsService.powerUps.filter( powerUp => {
-      return powerUp.usesLeft !== '0';
+      return +powerUp.usesLeft;
     })
   }
 
   powerUpClicked(powerUp: PowerUp):void {
-    if(powerUp.usesLeft !== '0') {
+    if(+powerUp.usesLeft) {
       this.battleService.usedInBattlePowerUps.find(item => item.title === powerUp.title)
         ? this.battleService.removePowerUp(powerUp)
         : this.battleService.addPowerUp(powerUp);
@@ -50,16 +52,12 @@ export class HeroBattleComponent implements OnInit {
   }
 
   delay(): void {
-    new Promise((resolve, reject) => {
-      setTimeout(() => {
-        this.showLoader = false;
-        resolve();
-      }, 1000);
-    }).then( () => {
-      this.initAvailablePowerUps();
-    }).then( () => {
-      this.showModal = true;
-    });
+    of(false).pipe(
+      delay(5500),
+    ).subscribe(toShow => {
+      this.showLoader = toShow;
+    }).add( () => this.initAvailablePowerUps() )
+      .add( () => this.showModal = true );
   }
 
   hideModal(): void {

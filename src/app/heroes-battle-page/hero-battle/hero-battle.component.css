@@ -166,6 +166,10 @@ a.btnFight:active { background: rgb(152,15,0); }
   padding: 2%;
 }
 
+.modalContent h1 {
+  text-shadow: #EEEE00 0 0 20px, #FF0000 7px 7px 7px;
+}
+
 a.buttonOk {
   margin-top: 4%;
   margin-bottom: 2%;
