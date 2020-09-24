@@ -18,7 +18,7 @@ header {
 }
 #textLeft {
   padding: 0.8%;
-  width: 80%;
+  width: 45%;
   justify-content: left;
 }
 #textRight {
@@ -46,4 +46,11 @@ a {
   text-decoration: none;
   color: white;
 }
+#center {
+  padding: 0.95%;
+  width: 30%;
+}
 
+#center p:hover {
+  text-shadow: #EEEE00 0 0 10px, #FF0000 5px 5px 5px;
+}

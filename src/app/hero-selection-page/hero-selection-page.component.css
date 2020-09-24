@@ -68,3 +68,16 @@ form button {
 .circleAlph:not(:hover) {
   transition: 0.3s;
 }
+
+.modal {
+  padding: 1%;
+  position: absolute;
+  top: 15%;
+  left: 2%;
+  border: 2px solid black;
+  border-radius: 20px;
+  background: rgba(255,0,0,0.8);
+  color: black;
+  font-weight: bold;
+  font-size: 150%;
+}

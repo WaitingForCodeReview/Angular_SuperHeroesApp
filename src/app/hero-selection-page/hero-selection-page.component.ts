@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { UserCreateValidators } from "../user-create.validators";
 import { HeroesService } from "../heroes.service";
 import { AppConfig } from "../app-config";
+import { ActivatedRoute } from "@angular/router";
 
 
 @Component({
@@ -18,13 +19,22 @@ export class HeroSelectionPageComponent implements OnInit {
   alphabet: string[] = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
   circleLetter: string = 'a';
   trackByFn = AppConfig.trackByFn;
+  noHeroFound: boolean
 
-  constructor(public heroesService: HeroesService) {}
+  constructor(
+    public heroesService: HeroesService,
+    public route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.initRecentSearches();
     this.initOwnedHeroes();
     this.formInit();
+    this.route
+      .queryParams
+      .subscribe(params => {
+        this.noHeroFound = params['noHeroFound'];
+      });
   }
 
   initRecentSearches(): void {
@@ -83,8 +93,19 @@ export class HeroSelectionPageComponent implements OnInit {
     this.heroesService.setLastSearchLocalStorage();
   }
 
-  hideUnhideAlphabetical() {
+  hideUnhideAlphabetical(): void {
     this.showAlphabetical = !this.showAlphabetical
   }
 
+  showModal(): boolean {
+    const ownedLength: number = this.heroesService.ownedHeroes.length;
+
+    if (ownedLength) {
+      return false;
+    }
+    else if (!ownedLength && !!this.noHeroFound) {
+      return true;
+    }
+    return !!this.noHeroFound;
+  }
 }
